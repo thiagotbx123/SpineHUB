@@ -1,20 +1,21 @@
-# Sessions - Histórico de Sessões
+# Sessions - Historico de Sessoes
 
-Esta pasta contém o registro de todas as sessões de trabalho no projeto.
+Esta pasta contem o registro de todas as sessoes de trabalho no projeto.
 
 ## Estrutura
 
-- `_template.md` - Template padrão para novas sessões
-- `YYYY-MM-DD_HH-MM.md` - Arquivos de sessão individuais
+- `_template.md` - Template padrao para novas sessoes
+- `YYYY-MM-DD_HH-MM.md` - Arquivos de sessao individuais
 
 ## Como Usar
 
-1. Ao iniciar uma sessão, leia as últimas sessões para contexto
-2. Ao finalizar, execute `/consolidar` para criar o arquivo de sessão
-3. Nunca delete arquivos de sessão - são histórico permanente
+1. Ao iniciar uma sessao, leia as ultimas sessoes para contexto
+2. Ao finalizar, execute `/consolidar` para criar o arquivo de sessao
+3. Nunca delete arquivos de sessao - sao historico permanente
 
-## Índice de Sessões
+## Indice de Sessoes
 
 | Data | Resumo | Destaques |
 |------|--------|-----------|
-| [YYYY-MM-DD] | [resumo] | [principais conquistas] |
+| 2024-12-22 | Criacao do SpineHUB | Estrutura completa v1.0 |
+| 2024-12-22 | Renomeacao | ESPINHA_DORSAL -> SpineHUB v2.0 |

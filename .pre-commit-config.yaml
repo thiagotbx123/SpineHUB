@@ -1,4 +1,4 @@
-# === ESPINHA_DORSAL Pre-commit Hooks ===
+# === TSA SpineHub Consolidation - Pre-commit Hooks ===
 # Instalar: pip install pre-commit && pre-commit install
 
 repos:

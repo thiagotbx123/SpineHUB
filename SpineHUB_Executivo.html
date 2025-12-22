@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSA SpineHub - Como Funciona</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px 50px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .title span {
+            color: #4a90d9;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .tagline {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .main-concept {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #4a90d9;
+        }
+
+        .main-concept p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .main-concept strong {
+            color: #4a90d9;
+        }
+
+        .diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            flex: 1;
+        }
+
+        .phase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 280px;
+        }
+
+        .phase-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .phase-number {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 28px;
+            height: 28px;
+            background: #1a1a2e;
+            color: white;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phase-1 .phase-icon { background: linear-gradient(135deg, #28a745, #20c997); }
+        .phase-2 .phase-icon { background: linear-gradient(135deg, #4a90d9, #357abd); }
+        .phase-3 .phase-icon { background: linear-gradient(135deg, #6f42c1, #9b59b6); }
+
+        .phase-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .phase-desc {
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .phase-action {
+            margin-top: 10px;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .phase-1 .phase-action { background: #d4edda; color: #155724; }
+        .phase-2 .phase-action { background: #d6e9f8; color: #1a5a8a; }
+        .phase-3 .phase-action { background: #e7ddfa; color: #4a2c7a; }
+
+        .arrow {
+            font-size: 40px;
+            color: #ccc;
+            margin: 0 10px;
+            margin-bottom: 60px;
+        }
+
+        .benefits {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .benefit-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #4a90d9;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <div>
+                <div class="title">Spine<span>HUB</span></div>
+                <div class="subtitle">Framework de Continuidade para Claude Code</div>
+            </div>
+            <div class="tagline">Claude nunca perde contexto</div>
+        </div>
+
+        <div class="content">
+            <div class="main-concept">
+                <p>O problema: <strong>Claude esquece tudo</strong> quando a sessao termina. A solucao: <strong>SpineHUB</strong> salva e recupera automaticamente.</p>
+            </div>
+
+            <div class="diagram">
+                <div class="phase phase-1">
+                    <div class="phase-icon">
+                        <span class="phase-number">1</span>
+                        📖
+                    </div>
+                    <div class="phase-title">INICIO</div>
+                    <div class="phase-desc">Claude le o arquivo de memoria e recupera todo o contexto anterior</div>
+                    <div class="phase-action">Le memory.md</div>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="phase phase-2">
+                    <div class="phase-icon">
+                        <span class="phase-number">2</span>
+                        💻
+                    </div>
+                    <div class="phase-title">TRABALHO</div>
+                    <div class="phase-desc">Voce trabalha normalmente, Claude mantem o contexto durante a sessao</div>
+                    <div class="phase-action">Desenvolvimento</div>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="phase phase-3">
+                    <div class="phase-icon">
+                        <span class="phase-number">3</span>
+                        💾
+                    </div>
+                    <div class="phase-title">CONSOLIDAR</div>
+                    <div class="phase-desc">Ao final, /consolidar salva tudo: decisoes, aprendizados e proximos passos</div>
+                    <div class="phase-action">/consolidar</div>
+                </div>
+            </div>
+
+            <div class="benefits">
+                <div class="benefit">
+                    <div class="benefit-icon">🔄</div>
+                    <span><strong>Continuidade:</strong> Retome de onde parou</span>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">📝</div>
+                    <span><strong>Historico:</strong> Tudo documentado</span>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🎯</div>
+                    <span><strong>Contexto:</strong> Claude entende o projeto</span>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">⚡</div>
+                    <span><strong>Produtividade:</strong> Sem re-explicacoes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            TSA SpineHub Consolidation v2.0 | Template padrao para projetos com Claude Code
+        </div>
+    </div>
+</body>
+</html>

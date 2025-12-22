@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSA SpineHub - Overview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .slide {
+            background: white;
+            width: 1200px;
+            height: 675px;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 42px;
+            color: #1a1a2e;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+        .header p {
+            font-size: 18px;
+            color: #666;
+            margin-top: 8px;
+        }
+        .content {
+            display: flex;
+            flex: 1;
+            gap: 40px;
+        }
+        .diagram {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 140px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        .step-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .step-desc {
+            font-size: 11px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+        .arrow {
+            font-size: 30px;
+            color: #667eea;
+        }
+        .center-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+        }
+        .center-box h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .center-box p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        .benefits {
+            flex: 1;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+        }
+        .benefits h3 {
+            color: #1a1a2e;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #444;
+        }
+        .benefit-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+        .commands {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+        .commands h4 {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .cmd {
+            display: inline-block;
+            background: #1a1a2e;
+            color: #4ade80;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1>SpineHUB</h1>
+            <p>Template de estrutura padrao para projetos com IA</p>
+        </div>
+
+        <div class="content">
+            <div class="diagram">
+                <div class="flow">
+                    <div class="step">
+                        <div class="step-icon">🚀</div>
+                        <div class="step-title">Inicio</div>
+                        <div class="step-desc">Claude le contexto</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-icon">💻</div>
+                        <div class="step-title">Trabalho</div>
+                        <div class="step-desc">Sessao produtiva</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-icon">💾</div>
+                        <div class="step-title">Consolida</div>
+                        <div class="step-desc">/consolidar</div>
+                    </div>
+                </div>
+
+                <div class="center-box">
+                    <h2>MEMORIA PERSISTENTE</h2>
+                    <p>Conhecimento preservado entre sessoes - nunca perde contexto</p>
+                </div>
+
+                <div class="flow">
+                    <div class="step">
+                        <div class="step-icon">📁</div>
+                        <div class="step-title">Memory</div>
+                        <div class="step-desc">Estado atual</div>
+                    </div>
+                    <div class="arrow">+</div>
+                    <div class="step">
+                        <div class="step-icon">📚</div>
+                        <div class="step-title">Sessions</div>
+                        <div class="step-desc">Historico</div>
+                    </div>
+                    <div class="arrow">+</div>
+                    <div class="step">
+                        <div class="step-icon">🔄</div>
+                        <div class="step-title">Git</div>
+                        <div class="step-desc">Versionamento</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefits">
+                <h3>Beneficios</h3>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🧠</div>
+                    <span>Contexto preservado entre sessoes</span>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">📝</div>
+                    <span>Documentacao automatica</span>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔒</div>
+                    <span>Historico versionado (Git)</span>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✅</div>
+                    <span>Qualidade de codigo (hooks)</span>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">📊</div>
+                    <span>Visibilidade do projeto</span>
+                </div>
+
+                <div class="commands">
+                    <h4>Comandos</h4>
+                    <span class="cmd">/status</span>
+                    <span class="cmd">/consolidar</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            TSA SpineHub Consolidation v2.0
+        </div>
+    </div>
+</body>
+</html>

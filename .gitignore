@@ -1,8 +1,12 @@
-# === ESPINHA_DORSAL .gitignore ===
+# === TSA SpineHub Consolidation .gitignore ===
+
+# Configuracao do Usuario (dados pessoais)
+.claude/user-config.md
 
 # Credenciais e Segredos
 .env
 .env.*
+!.env.template
 *.pem
 *.key
 credentials.json
