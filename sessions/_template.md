@@ -1,47 +1,47 @@
-# Sessão: YYYY-MM-DD HH:MM
+# Session: YYYY-MM-DD HH:MM
 
-## Resumo
-[Breve descrição do que foi feito nesta sessão]
+## Summary
+[Brief description of what was done in this session]
 
-## Objetivos
-- [ ] [Objetivo 1]
-- [ ] [Objetivo 2]
+## Objectives
+- [ ] [Objective 1]
+- [ ] [Objective 2]
 
-## Decisões Tomadas
-| Decisão | Contexto | Alternativas Consideradas |
-|---------|----------|---------------------------|
-| [decisão] | [por que] | [outras opções] |
+## Decisions Made
+| Decision | Context | Alternatives Considered |
+|----------|---------|-------------------------|
+| [decision] | [why] | [other options] |
 
-## Conhecimentos Adquiridos
-- **[Área]:** [O que foi aprendido]
+## Knowledge Acquired
+- **[Area]:** [What was learned]
 
-## Arquivos Criados/Modificados
-| Arquivo | Ação | Descrição |
-|---------|------|-----------|
-| [path] | Criado/Modificado | [o que foi feito] |
+## Files Created/Modified
+| File | Action | Description |
+|------|--------|-------------|
+| [path] | Created/Modified | [what was done] |
 
-## Problemas e Soluções
-| Problema | Solução | Referência |
-|----------|---------|------------|
-| [problema] | [como resolveu] | [link/doc] |
+## Problems and Solutions
+| Problem | Solution | Reference |
+|---------|----------|-----------|
+| [problem] | [how it was solved] | [link/doc] |
 
-## Tarefas Completadas
-- [x] [Tarefa 1]
-- [x] [Tarefa 2]
+## Completed Tasks
+- [x] [Task 1]
+- [x] [Task 2]
 
-## Novas Tarefas Identificadas
-- [ ] [Nova tarefa 1]
-- [ ] [Nova tarefa 2]
+## New Tasks Identified
+- [ ] [New task 1]
+- [ ] [New task 2]
 
-## Próximos Passos
-1. [Próximo passo prioritário]
-2. [Segundo passo]
-3. [Terceiro passo]
+## Next Steps
+1. [Priority next step]
+2. [Second step]
+3. [Third step]
 
-## Métricas da Sessão
-- **Duração:** [tempo]
-- **Commits:** [quantidade]
-- **Arquivos alterados:** [quantidade]
+## Session Metrics
+- **Duration:** [time]
+- **Commits:** [count]
+- **Files changed:** [count]
 
 ---
-*Sessão consolidada em: [timestamp]*
+*Session consolidated at: [timestamp]*

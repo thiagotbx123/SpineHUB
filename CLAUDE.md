@@ -1,161 +1,161 @@
-# TSA SpineHub Consolidation - Instrucoes para Claude
+# TSA SpineHub Consolidation - Instructions for Claude
 
-> **LEITURA OBRIGATORIA** - Este arquivo contem instrucoes que o Claude DEVE seguir em TODA sessao.
-
----
-
-## Protocolo de Inicio de Sessao
-
-**ANTES de responder qualquer coisa, SEMPRE execute estes passos NA ORDEM:**
-
-### 1. Detectar Usuario
-Verifique se `.claude/user-config.md` existe:
-- **Se NAO existir:** Execute `/setup` para configurar o novo usuario
-- **Se existir:** Leia para conhecer o usuario e suas preferencias
-
-### 2. Recuperar Contexto
-Leia `.claude/memory.md` para entender:
-- Fase atual do projeto
-- Ultimas acoes realizadas
-- Bloqueios conhecidos
-- Proximos passos pendentes
-
-### 3. Verificar Sessoes Anteriores
-Verifique `sessions/` para:
-- Ultima sessao registrada
-- Trabalho recente nao consolidado
-- Contexto adicional
-
-### 4. Consultar Knowledge Base (se necessario)
-Verifique `knowledge-base/` para:
-- Documentacao de APIs
-- Decisoes arquitetônicas
-- Troubleshooting conhecido
+> **MANDATORY READING** - This file contains instructions that Claude MUST follow in EVERY session.
 
 ---
 
-## Protocolo de Novo Usuario
+## Session Start Protocol
 
-Se o usuario NAO estiver configurado (`.claude/user-config.md` nao existe):
+**BEFORE responding to anything, ALWAYS execute these steps IN ORDER:**
 
-1. **Tente detectar automaticamente:**
+### 1. Detect User
+Check if `.claude/user-config.md` exists:
+- **If NOT exists:** Run `/setup` to configure the new user
+- **If exists:** Read it to know the user and their preferences
+
+### 2. Recover Context
+Read `.claude/memory.md` to understand:
+- Current project phase
+- Last actions performed
+- Known blockers
+- Pending next steps
+
+### 3. Check Previous Sessions
+Check `sessions/` for:
+- Last registered session
+- Recent unconsolidated work
+- Additional context
+
+### 4. Consult Knowledge Base (if needed)
+Check `knowledge-base/` for:
+- API documentation
+- Architectural decisions
+- Known troubleshooting
+
+---
+
+## New User Protocol
+
+If the user is NOT configured (`.claude/user-config.md` doesn't exist):
+
+1. **Try to detect automatically:**
    ```bash
    git config user.name
    git config user.email
    ```
 
-2. **Se conseguir:** Crie a configuracao com os dados detectados
+2. **If successful:** Create the configuration with detected data
 
-3. **Se NAO conseguir:** Pergunte ao usuario:
-   - Nome completo
+3. **If NOT successful:** Ask the user:
+   - Full name
    - Email
-   - Quais servicos usa (Slack, Linear, Drive, etc.)
-   - Idioma preferido
+   - Which services they use (Slack, Linear, Drive, etc.)
+   - Preferred language
 
-4. **Crie os arquivos necessarios** e oriente sobre proximos passos
-
----
-
-## Protocolo de Fim de Sessao
-
-**Ao finalizar trabalho, SEMPRE execute `/consolidar`:**
-
-1. Documente o que foi feito
-2. Atualize memory.md
-3. Crie arquivo de sessao em `sessions/YYYY-MM-DD_HH-MM.md`
-4. Commit e push para Git (se configurado)
+4. **Create necessary files** and guide them on next steps
 
 ---
 
-## Comandos Disponiveis
+## Session End Protocol
 
-| Comando | Funcao | Quando Usar |
-|---------|--------|-------------|
-| `/setup` | Configuracao inicial | Primeiro uso ou novo usuario |
-| `/status` | Visao geral do projeto | Inicio de sessao |
-| `/consolidar` | Salvar sessao | Final de cada sessao de trabalho |
+**When finishing work, ALWAYS run `/consolidar`:**
 
----
-
-## Regras de Ouro
-
-1. **Detecte o usuario** - Sempre verifique user-config.md primeiro
-2. **Nunca perca contexto** - Sempre leia memory.md
-3. **Sempre documente** - Use /consolidar ao final
-4. **Mantenha historico** - Nunca delete sessoes ou conhecimento
-5. **Git e obrigatorio** - Todo trabalho deve ser versionado
-6. **Oriente o usuario** - Se algo nao estiver configurado, ensine como fazer
+1. Document what was done
+2. Update memory.md
+3. Create session file in `sessions/YYYY-MM-DD_HH-MM.md`
+4. Commit and push to Git (if configured)
 
 ---
 
-## Estrutura do Projeto
+## Available Commands
+
+| Command | Function | When to Use |
+|---------|----------|-------------|
+| `/setup` | Initial setup | First use or new user |
+| `/status` | Project overview | Start of session |
+| `/consolidar` | Save session | End of each work session |
+
+---
+
+## Golden Rules
+
+1. **Detect the user** - Always check user-config.md first
+2. **Never lose context** - Always read memory.md
+3. **Always document** - Use /consolidar at the end
+4. **Maintain history** - Never delete sessions or knowledge
+5. **Git is mandatory** - All work must be versioned
+6. **Guide the user** - If something isn't configured, teach how to do it
+
+---
+
+## Project Structure
 
 ```
 SpineHUB/
 ├── .claude/
 │   ├── commands/
-│   │   ├── setup.md        # Configuracao inicial
-│   │   ├── status.md       # Visao geral
-│   │   └── consolidar.md   # Fim de sessao
-│   ├── memory.md           # Estado persistente
-│   ├── user-config.md      # Config do usuario (NAO COMMITAR)
-│   ├── user-config.template.md  # Template para novos usuarios
-│   └── settings.json       # Permissoes Claude
-├── sessions/               # Historico de sessoes
-├── knowledge-base/         # Base de conhecimento
-├── .env                    # Credenciais (NAO COMMITAR)
-├── .env.template           # Template de credenciais
-├── CLAUDE.md               # Este arquivo
-├── .gitignore              # Exclusoes Git
-└── .pre-commit-config.yaml # Hooks de qualidade
+│   │   ├── setup.md        # Initial setup
+│   │   ├── status.md       # Overview
+│   │   └── consolidar.md   # End of session
+│   ├── memory.md           # Persistent state
+│   ├── user-config.md      # User config (DO NOT COMMIT)
+│   ├── user-config.template.md  # Template for new users
+│   └── settings.json       # Claude permissions
+├── sessions/               # Session history
+├── knowledge-base/         # Knowledge base
+├── .env                    # Credentials (DO NOT COMMIT)
+├── .env.template           # Credentials template
+├── CLAUDE.md               # This file
+├── .gitignore              # Git exclusions
+└── .pre-commit-config.yaml # Quality hooks
 ```
 
 ---
 
-## Arquivos Sensiveis (NAO COMMITAR)
+## Sensitive Files (DO NOT COMMIT)
 
-Estes arquivos contem dados especificos do usuario e NAO devem ser versionados:
+These files contain user-specific data and should NOT be versioned:
 
-| Arquivo | Conteudo |
-|---------|----------|
-| `.claude/user-config.md` | Dados pessoais do usuario |
-| `.env` | Credenciais e tokens |
-| `*_secret*` | Qualquer arquivo com "secret" no nome |
-| `*_token*` | Qualquer arquivo com "token" no nome |
+| File | Content |
+|------|---------|
+| `.claude/user-config.md` | User's personal data |
+| `.env` | Credentials and tokens |
+| `*_secret*` | Any file with "secret" in the name |
+| `*_token*` | Any file with "token" in the name |
 
 ---
 
-## Fluxo de Trabalho
+## Workflow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      INICIO DE SESSAO                       │
+│                      SESSION START                          │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
                     ┌─────────────────┐
                     │ user-config.md  │
-                    │    existe?      │
+                    │    exists?      │
                     └─────────────────┘
                          │      │
-                    NAO  │      │  SIM
+                     NO  │      │  YES
                          ▼      ▼
               ┌──────────────┐  ┌──────────────┐
-              │   /setup     │  │ Ler config   │
-              │  (onboard)   │  │ do usuario   │
+              │   /setup     │  │ Read user    │
+              │  (onboard)   │  │ config       │
               └──────────────┘  └──────────────┘
                          │      │
                          └──────┘
                               │
                               ▼
                     ┌─────────────────┐
-                    │ Ler memory.md   │
-                    │ e sessions/     │
+                    │ Read memory.md  │
+                    │ and sessions/   │
                     └─────────────────┘
                               │
                               ▼
                     ┌─────────────────┐
-                    │    TRABALHO     │
+                    │      WORK       │
                     └─────────────────┘
                               │
                               ▼
@@ -165,10 +165,10 @@ Estes arquivos contem dados especificos do usuario e NAO devem ser versionados:
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                       FIM DE SESSAO                         │
+│                       SESSION END                           │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-**IMPORTANTE:** Estas instrucoes garantem continuidade, qualidade e portabilidade entre usuarios e sessoes.
+**IMPORTANT:** These instructions ensure continuity, quality, and portability across users and sessions.

@@ -1,49 +1,49 @@
-# /consolidar - Consolidação de Sessão
+# /consolidar - Session Consolidation
 
-Execute esta rotina ao FINAL de cada sessão de trabalho para preservar conhecimento.
+Run this routine at the END of each work session to preserve knowledge.
 
-## PASSOS OBRIGATÓRIOS
+## MANDATORY STEPS
 
-### PASSO 1: Análise da Sessão
-Analise o que foi feito nesta sessão:
-- Decisões tomadas
-- Novos conhecimentos adquiridos
-- Arquivos criados/modificados
-- Problemas resolvidos
-- Tarefas completadas
-- Novas tarefas identificadas
+### STEP 1: Session Analysis
+Analyze what was done in this session:
+- Decisions made
+- New knowledge acquired
+- Files created/modified
+- Problems solved
+- Tasks completed
+- New tasks identified
 
-### PASSO 2: Criar Arquivo de Sessão
-Crie arquivo em `sessions/YYYY-MM-DD_HH-MM.md` usando o template `sessions/_template.md`
+### STEP 2: Create Session File
+Create file in `sessions/YYYY-MM-DD_HH-MM.md` using the template `sessions/_template.md`
 
-### PASSO 3: Atualizar Knowledge Base
-Atualize os arquivos relevantes em `knowledge-base/`:
-- Novos aprendizados
-- Documentação de APIs/integrações
-- Troubleshooting descoberto
+### STEP 3: Update Knowledge Base
+Update relevant files in `knowledge-base/`:
+- New learnings
+- API/integration documentation
+- Discovered troubleshooting
 
-### PASSO 4: Atualizar Memory
-Atualize `.claude/memory.md` com:
-- Estado atual do projeto
-- Últimas ações realizadas
-- Bloqueios conhecidos
-- Próximos passos sugeridos
+### STEP 4: Update Memory
+Update `.claude/memory.md` with:
+- Current project state
+- Recent actions performed
+- Known blockers
+- Suggested next steps
 
-### PASSO 5: Commit e Push
-Execute:
+### STEP 5: Commit and Push
+Run:
 ```bash
 git add .
-git commit -m "consolidar: [resumo breve da sessão]"
+git commit -m "consolidar: [brief session summary]"
 git push
 ```
 
-### PASSO 6: Relatório Final
-Apresente ao usuário:
-- Resumo do que foi consolidado
-- Arquivos atualizados
-- Commit realizado
-- Próximos passos sugeridos
+### STEP 6: Final Report
+Present to user:
+- Summary of what was consolidated
+- Updated files
+- Commit made
+- Suggested next steps
 
 ---
 
-**IMPORTANTE:** Esta rotina garante que nenhum conhecimento seja perdido entre sessões.
+**IMPORTANT:** This routine ensures no knowledge is lost between sessions.

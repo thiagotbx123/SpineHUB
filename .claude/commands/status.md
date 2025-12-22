@@ -1,58 +1,58 @@
-# /status - Status do Projeto
+# /status - Project Status
 
-Execute para obter visão geral do estado atual do projeto.
+Run to get an overview of the current project state.
 
-## O QUE VERIFICAR
+## WHAT TO CHECK
 
-### 1. Estado do Projeto
-Leia `.claude/memory.md` e apresente:
-- Fase atual
-- Últimas ações realizadas
-- Bloqueios conhecidos
+### 1. Project State
+Read `.claude/memory.md` and present:
+- Current phase
+- Recent actions performed
+- Known blockers
 
 ### 2. Knowledge Base
-Liste arquivos em `knowledge-base/`:
-- Quantidade de documentos
-- Última atualização
+List files in `knowledge-base/`:
+- Number of documents
+- Last update
 
-### 3. Sessões
-Verifique `sessions/`:
-- Total de sessões registradas
-- Última sessão (data e resumo)
+### 3. Sessions
+Check `sessions/`:
+- Total registered sessions
+- Last session (date and summary)
 
 ### 4. Git Status
-Execute e apresente:
+Run and present:
 ```bash
 git status
 git log --oneline -5
 ```
 
-### 5. Próximas Ações
-Baseado no contexto, sugira 3 próximas ações prioritárias.
+### 5. Next Actions
+Based on context, suggest 3 priority next actions.
 
 ---
 
-## FORMATO DE SAÍDA
+## OUTPUT FORMAT
 
 ```
-📊 STATUS DO PROJETO: [nome]
+📊 PROJECT STATUS: [name]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📍 Fase Atual: [fase]
-📅 Última Sessão: [data]
-📚 Knowledge Base: [X] documentos
-🔄 Git: [X] commits, branch [nome]
+📍 Current Phase: [phase]
+📅 Last Session: [date]
+📚 Knowledge Base: [X] documents
+🔄 Git: [X] commits, branch [name]
 
-⚠️ Bloqueios:
-- [bloqueio 1]
-- [bloqueio 2]
+⚠️ Blockers:
+- [blocker 1]
+- [blocker 2]
 
-✅ Últimas Ações:
-- [ação 1]
-- [ação 2]
+✅ Recent Actions:
+- [action 1]
+- [action 2]
 
-🎯 Próximos Passos:
-1. [ação prioritária 1]
-2. [ação prioritária 2]
-3. [ação prioritária 3]
+🎯 Next Steps:
+1. [priority action 1]
+2. [priority action 2]
+3. [priority action 3]
 ```

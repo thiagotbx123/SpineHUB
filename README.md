@@ -1,86 +1,92 @@
 # TSA SpineHub Consolidation
 
-Template de estrutura padrão para projetos com Claude Code.
+Standard template structure for projects with Claude Code.
 
-## O que é
+## What is it
 
-O **SpineHUB** é um conjunto de rotinas e estruturas que garantem:
-- Persistencia de contexto entre sessoes
-- Documentacao automatica de trabalho
-- Versionamento com Git
-- Qualidade de codigo (pre-commit hooks)
-- Base de conhecimento organizada
+**SpineHUB** is a set of routines and structures that ensure:
+- Context persistence between sessions
+- Automatic work documentation
+- Git versioning
+- Code quality (pre-commit hooks)
+- Organized knowledge base
+- Multi-user support
 
-## Como Aplicar em um Projeto
+## How to Apply to a Project
 
-### Metodo 1: Copiar Estrutura
+### Method 1: Copy Structure
 ```bash
-# Copie toda a estrutura para seu projeto
-cp -r SpineHUB/.claude SEU_PROJETO/
-cp -r SpineHUB/sessions SEU_PROJETO/
-cp -r SpineHUB/knowledge-base SEU_PROJETO/
-cp SpineHUB/CLAUDE.md SEU_PROJETO/
-cp SpineHUB/.gitignore SEU_PROJETO/
-cp SpineHUB/.pre-commit-config.yaml SEU_PROJETO/
+# Copy the entire structure to your project
+cp -r SpineHUB/.claude YOUR_PROJECT/
+cp -r SpineHUB/sessions YOUR_PROJECT/
+cp -r SpineHUB/knowledge-base YOUR_PROJECT/
+cp SpineHUB/CLAUDE.md YOUR_PROJECT/
+cp SpineHUB/.gitignore YOUR_PROJECT/
+cp SpineHUB/.pre-commit-config.yaml YOUR_PROJECT/
 ```
 
-### Metodo 2: Usar comando Claude
-Diga ao Claude:
-> "Aplique o SpineHUB no projeto [caminho]"
+### Method 2: Use Claude command
+Tell Claude:
+> "Apply SpineHUB to the project [path]"
 
-## Estrutura
+## Structure
 
 ```
 SpineHUB/
 ├── .claude/
 │   ├── commands/
-│   │   ├── consolidar.md    # Rotina de fim de sessao
-│   │   └── status.md        # Visao geral do projeto
-│   ├── memory.md            # Estado persistente
-│   └── settings.json        # Permissoes
+│   │   ├── setup.md         # Initial setup for new users
+│   │   ├── consolidar.md    # End of session routine
+│   │   └── status.md        # Project overview
+│   ├── memory.md            # Persistent state
+│   ├── user-config.template.md  # User config template
+│   └── settings.json        # Permissions
 ├── sessions/
-│   ├── _template.md         # Template de sessao
-│   └── README.md            # Instrucoes
+│   ├── _template.md         # Session template
+│   └── README.md            # Instructions
 ├── knowledge-base/
-│   └── README.md            # Instrucoes
-├── CLAUDE.md                # Instrucoes obrigatorias
-├── .gitignore               # Exclusoes Git
-├── .pre-commit-config.yaml  # Hooks de qualidade
-└── README.md                # Este arquivo
+│   └── README.md            # Instructions
+├── .env.template            # Credentials template
+├── CLAUDE.md                # Mandatory instructions
+├── .gitignore               # Git exclusions
+├── .pre-commit-config.yaml  # Quality hooks
+└── README.md                # This file
 ```
 
-## Comandos Disponiveis
+## Available Commands
 
-| Comando | Quando Usar |
+| Command | When to Use |
 |---------|-------------|
-| `/status` | Inicio de sessao ou quando precisar de visao geral |
-| `/consolidar` | Final de sessao para documentar trabalho |
+| `/setup` | First use or new user setup |
+| `/status` | Start of session or when you need an overview |
+| `/consolidar` | End of session to document work |
 
-## Rotina de Trabalho
+## Work Routine
 
 ```
-1. Inicio de Sessao
-   └─> Claude le memory.md automaticamente (via CLAUDE.md)
+1. Session Start
+   └─> Claude reads memory.md automatically (via CLAUDE.md)
+   └─> Checks if user is configured
 
-2. Durante o Trabalho
-   └─> Trabalho normal, Claude mantem contexto
+2. During Work
+   └─> Normal work, Claude maintains context
 
-3. Fim de Sessao
-   └─> Usuario executa /consolidar
-       ├─> Documenta sessao
-       ├─> Atualiza memory.md
-       ├─> Cria arquivo em sessions/
-       └─> Commit + Push Git
+3. Session End
+   └─> User runs /consolidar
+       ├─> Documents session
+       ├─> Updates memory.md
+       ├─> Creates file in sessions/
+       └─> Commit + Push to Git
 ```
 
-## Projetos Usando SpineHUB
+## Projects Using SpineHUB
 
 - `intuit-boom`
 - `GEM-BOOM`
-- `QBO WFS` (parcial)
+- `QBO WFS`
 - `TSA_CORTEX`
 
 ---
 
-**Criado em:** 2024-12-22
-**Versao:** 2.0 (renomeado de ESPINHA_DORSAL)
+**Created:** 2024-12-22
+**Version:** 2.1 (renamed from ESPINHA_DORSAL, multi-user support)

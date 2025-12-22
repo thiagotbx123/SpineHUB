@@ -1,67 +1,67 @@
-# Configuracao do Usuario - SpineHUB
+# User Configuration - SpineHUB
 
-> **INSTRUCOES:** Copie este arquivo para `user-config.md` e preencha suas informacoes.
-> Este arquivo NAO deve ser commitado (esta no .gitignore).
+> **INSTRUCTIONS:** Copy this file to `user-config.md` and fill in your information.
+> This file should NOT be committed (it's in .gitignore).
 
-## Identificacao
+## Identification
 
-**Nome:** [Seu nome completo]
-**Email:** [seu@email.com]
-**GitHub:** [seu-usuario]
-**Empresa/Time:** [nome do time ou empresa]
+**Name:** [Your full name]
+**Email:** [your@email.com]
+**GitHub:** [your-username]
+**Company/Team:** [team or company name]
 
-## Credenciais e Acessos
+## Credentials and Access
 
-> Preencha apenas os servicos que voce usa. Deixe em branco os que nao se aplicam.
+> Fill in only the services you use. Leave blank those that don't apply.
 
 ### Git
-- **Usuario Git configurado:** [ ] Sim / [ ] Nao
-- **SSH Key configurada:** [ ] Sim / [ ] Nao
+- **Git user configured:** [ ] Yes / [ ] No
+- **SSH Key configured:** [ ] Yes / [ ] No
 
-### Slack (se aplicavel)
-- **Workspace:** [nome do workspace]
-- **User Token (xoxp-):** Configurado no .env? [ ] Sim / [ ] Nao
+### Slack (if applicable)
+- **Workspace:** [workspace name]
+- **User Token (xoxp-):** Configured in .env? [ ] Yes / [ ] No
 
-### Linear (se aplicavel)
-- **Workspace:** [nome]
-- **Team padrao:** [nome do time]
-- **API Key:** Configurado no .env? [ ] Sim / [ ] Nao
+### Linear (if applicable)
+- **Workspace:** [name]
+- **Default team:** [team name]
+- **API Key:** Configured in .env? [ ] Yes / [ ] No
 
-### Google Drive (se aplicavel)
-- **Conta:** [email]
-- **OAuth configurado:** [ ] Sim / [ ] Nao
+### Google Drive (if applicable)
+- **Account:** [email]
+- **OAuth configured:** [ ] Yes / [ ] No
 
-### Outros
-- [Adicione outros servicos conforme necessario]
+### Others
+- [Add other services as needed]
 
-## Preferencias
+## Preferences
 
-### Idioma de Output
-- [ ] Portugues
-- [ ] Ingles
-- [ ] Outro: ___
+### Output Language
+- [ ] Portuguese
+- [ ] English
+- [ ] Other: ___
 
-### Estilo de Comunicacao
-- [ ] Tecnico e direto
-- [ ] Detalhado e explicativo
-- [ ] Casual e amigavel
+### Communication Style
+- [ ] Technical and direct
+- [ ] Detailed and explanatory
+- [ ] Casual and friendly
 
-### Frequencia de Commits
-- [ ] A cada mudanca significativa
-- [ ] Ao final de cada tarefa
-- [ ] Apenas quando solicitado
+### Commit Frequency
+- [ ] On each significant change
+- [ ] At the end of each task
+- [ ] Only when requested
 
-## Projetos Ativos
+## Active Projects
 
-| Projeto | Caminho | Descricao |
-|---------|---------|-----------|
-| [nome] | [path] | [breve descricao] |
+| Project | Path | Description |
+|---------|------|-------------|
+| [name] | [path] | [brief description] |
 
-## Notas Pessoais
+## Personal Notes
 
-[Adicione qualquer informacao relevante para o Claude lembrar sobre voce ou seu contexto de trabalho]
+[Add any relevant information for Claude to remember about you or your work context]
 
 ---
 
-**Criado em:** [data]
-**Ultima atualizacao:** [data]
+**Created:** [date]
+**Last update:** [date]

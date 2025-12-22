@@ -1,28 +1,28 @@
 # Knowledge Base
 
-Base de conhecimento estruturada do projeto.
+Structured knowledge base for the project.
 
-## Estrutura Sugerida
+## Suggested Structure
 
 ```
 knowledge-base/
-├── README.md           # Este arquivo
-├── INDEX.md            # Índice geral de documentos
-├── api/                # Documentação de APIs
-├── integrations/       # Integrações externas
-├── troubleshooting/    # Problemas e soluções
-├── decisions/          # Decisões arquitetônicas
-└── references/         # Referências externas
+├── README.md           # This file
+├── INDEX.md            # General document index
+├── api/                # API documentation
+├── integrations/       # External integrations
+├── troubleshooting/    # Problems and solutions
+├── decisions/          # Architectural decisions
+└── references/         # External references
 ```
 
-## Como Usar
+## How to Use
 
-1. Sempre adicione novos conhecimentos via `/consolidar`
-2. Mantenha o INDEX.md atualizado
-3. Use links entre documentos para navegação
+1. Always add new knowledge via `/consolidar`
+2. Keep INDEX.md updated
+3. Use links between documents for navigation
 
-## Índice
+## Index
 
-| Documento | Descrição | Última Atualização |
-|-----------|-----------|-------------------|
-| [doc] | [descrição] | [data] |
+| Document | Description | Last Update |
+|----------|-------------|-------------|
+| [doc] | [description] | [date] |

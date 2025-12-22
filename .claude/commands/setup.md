@@ -1,88 +1,88 @@
-# /setup - Configuracao Inicial do SpineHUB
+# /setup - SpineHUB Initial Setup
 
-Execute este comando quando um novo usuario estiver configurando o SpineHUB pela primeira vez.
+Run this command when a new user is setting up SpineHUB for the first time.
 
-## LOGICA DE DETECCAO
+## DETECTION LOGIC
 
-### PASSO 1: Verificar se usuario ja esta configurado
-Verifique se existe o arquivo `.claude/user-config.md`:
-- Se existir e estiver preenchido: Usuario ja configurado, mostrar boas-vindas
-- Se nao existir ou estiver vazio: Iniciar onboarding
+### STEP 1: Check if user is already configured
+Check if `.claude/user-config.md` exists:
+- If exists and is filled: User already configured, show welcome message
+- If doesn't exist or is empty: Start onboarding
 
-### PASSO 2: Onboarding Automatico
-Tente detectar automaticamente:
+### STEP 2: Automatic Onboarding
+Try to detect automatically:
 
 ```bash
-# Nome e email do Git
+# Git name and email
 git config user.name
 git config user.email
 
-# Sistema operacional
+# Operating system
 uname -a  # Linux/Mac
 ver       # Windows
 
-# Diretorio home
+# Home directory
 echo $HOME  # Linux/Mac
 echo %USERPROFILE%  # Windows
 ```
 
-### PASSO 3: Perguntar ao Usuario
-Se nao conseguir detectar, pergunte:
+### STEP 3: Ask the User
+If detection fails, ask:
 
-1. **Nome completo**
-2. **Email principal**
-3. **Quais servicos usa?** (Slack, Linear, Drive, etc.)
-4. **Idioma preferido para outputs**
-5. **Projetos principais que vai trabalhar**
+1. **Full name**
+2. **Primary email**
+3. **Which services do you use?** (Slack, Linear, Drive, etc.)
+4. **Preferred language for outputs**
+5. **Main projects you'll work on**
 
-### PASSO 4: Criar Configuracao
-1. Copiar `.claude/user-config.template.md` para `.claude/user-config.md`
-2. Preencher com as informacoes coletadas
-3. Verificar se `.env` existe (se necessario para APIs)
-4. Testar conexoes basicas
+### STEP 4: Create Configuration
+1. Copy `.claude/user-config.template.md` to `.claude/user-config.md`
+2. Fill in with collected information
+3. Check if `.env` exists (if needed for APIs)
+4. Test basic connections
 
-### PASSO 5: Configurar Git (se necessario)
-Se Git nao estiver configurado:
+### STEP 5: Configure Git (if needed)
+If Git is not configured:
 ```bash
-git config --global user.name "Nome do Usuario"
-git config --global user.email "email@exemplo.com"
+git config --global user.name "User Name"
+git config --global user.email "email@example.com"
 ```
 
-### PASSO 6: Verificar Estrutura SpineHUB
-Confirmar que todos os diretorios existem:
-- `.claude/` com commands e memory
+### STEP 6: Verify SpineHUB Structure
+Confirm all directories exist:
+- `.claude/` with commands and memory
 - `sessions/`
 - `knowledge-base/`
 - `CLAUDE.md`
 
-### PASSO 7: Mensagem de Boas-Vindas
-Apresentar:
-- Resumo da configuracao
-- Comandos disponiveis (/status, /consolidar)
-- Proximos passos sugeridos
+### STEP 7: Welcome Message
+Present:
+- Configuration summary
+- Available commands (/status, /consolidar)
+- Suggested next steps
 
 ---
 
-## FORMATO DE SAIDA
+## OUTPUT FORMAT
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║           SpineHUB - Configuracao Inicial                    ║
+║           SpineHUB - Initial Setup                           ║
 ╠══════════════════════════════════════════════════════════════╣
 ║                                                              ║
-║  Usuario: [nome]                                             ║
+║  User: [name]                                                ║
 ║  Email: [email]                                              ║
-║  Sistema: [OS]                                               ║
+║  System: [OS]                                                ║
 ║                                                              ║
-║  Servicos Detectados:                                        ║
-║  ✅ Git configurado                                          ║
-║  ⚠️  Slack (precisa configurar token)                        ║
-║  ❌ Linear (nao configurado)                                 ║
+║  Detected Services:                                          ║
+║  ✅ Git configured                                           ║
+║  ⚠️  Slack (needs token setup)                               ║
+║  ❌ Linear (not configured)                                  ║
 ║                                                              ║
-║  Proximos Passos:                                            ║
-║  1. Configure suas credenciais no .env                       ║
-║  2. Execute /status para ver o estado atual                  ║
-║  3. Use /consolidar ao final de cada sessao                  ║
+║  Next Steps:                                                 ║
+║  1. Configure your credentials in .env                       ║
+║  2. Run /status to see current state                         ║
+║  3. Use /consolidar at the end of each session               ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
@@ -91,9 +91,9 @@ Apresentar:
 
 ## TROUBLESHOOTING
 
-| Problema | Solucao |
-|----------|---------|
-| Git nao instalado | Orientar instalacao do Git |
-| Permissao negada | Verificar diretorios e .gitignore |
-| .env nao existe | Criar template de .env |
-| Conexao falhou | Verificar credenciais e internet |
+| Problem | Solution |
+|---------|----------|
+| Git not installed | Guide Git installation |
+| Permission denied | Check directories and .gitignore |
+| .env doesn't exist | Create .env template |
+| Connection failed | Verify credentials and internet |

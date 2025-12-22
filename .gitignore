@@ -1,9 +1,9 @@
 # === TSA SpineHub Consolidation .gitignore ===
 
-# Configuracao do Usuario (dados pessoais)
+# User Configuration (personal data)
 .claude/user-config.md
 
-# Credenciais e Segredos
+# Credentials and Secrets
 .env
 .env.*
 !.env.template
@@ -14,7 +14,7 @@ secrets.json
 *_secret*
 *_token*
 
-# Dados Sensíveis
+# Sensitive Data
 data/exports/
 data/pii/
 evidence/prints/
@@ -51,13 +51,13 @@ desktop.ini
 *.log
 logs/
 
-# Temporários
+# Temporary
 *.tmp
 *.temp
 temp/
 tmp/
 
-# Node (se aplicável)
+# Node (if applicable)
 node_modules/
 npm-debug.log
 
@@ -65,5 +65,5 @@ npm-debug.log
 .cache/
 *.cache
 
-# Jupyter (se aplicável)
+# Jupyter (if applicable)
 .ipynb_checkpoints/

@@ -1,47 +1,47 @@
-# Memory - Estado Persistente do Projeto
+# Memory - Project Persistent State
 
-> Este arquivo mantem o contexto entre sessoes. Atualize ao final de cada sessao via `/consolidar`.
+> This file maintains context between sessions. Update at the end of each session via `/consolidar`.
 
-## Estado Atual
+## Current State
 
-**Fase:** [Inicial/Desenvolvimento/Teste/Producao]
-**Ultima Atualizacao:** [YYYY-MM-DD]
-**Usuario Atual:** [Ver .claude/user-config.md]
+**Phase:** [Initial/Development/Test/Production]
+**Last Update:** [YYYY-MM-DD]
+**Current User:** [See .claude/user-config.md]
 
-## Ultimas Acoes
+## Recent Actions
 
-| Data | Acao | Resultado | Usuario |
-|------|------|-----------|---------|
-| YYYY-MM-DD | [descricao] | [resultado] | [nome] |
+| Date | Action | Result | User |
+|------|--------|--------|------|
+| YYYY-MM-DD | [description] | [result] | [name] |
 
-## Bloqueios Conhecidos
+## Known Blockers
 
-- [ ] [Bloqueio 1 - descricao]
-- [ ] [Bloqueio 2 - descricao]
+- [ ] [Blocker 1 - description]
+- [ ] [Blocker 2 - description]
 
-## Decisoes Importantes
+## Important Decisions
 
-| Data | Decisao | Contexto | Decidido por |
-|------|---------|----------|--------------|
-| YYYY-MM-DD | [decisao] | [por que foi tomada] | [nome] |
+| Date | Decision | Context | Decided by |
+|------|----------|---------|------------|
+| YYYY-MM-DD | [decision] | [why it was made] | [name] |
 
-## Notas de Sessao
+## Session Notes
 
-### [YYYY-MM-DD] - [Usuario]
-- **Conquistas:** [o que foi feito]
-- **Aprendizados:** [o que foi descoberto]
-- **Proximos:** [o que fazer depois]
-
----
-
-## Historico do Projeto
-
-| Versao | Data | Mudanca |
-|--------|------|---------|
-| 1.0 | 2024-12-22 | Criacao como ESPINHA_DORSAL |
-| 2.0 | 2024-12-22 | Renomeado para SpineHUB |
-| 2.1 | 2024-12-22 | Suporte multi-usuario adicionado |
+### [YYYY-MM-DD] - [User]
+- **Achievements:** [what was done]
+- **Learnings:** [what was discovered]
+- **Next:** [what to do next]
 
 ---
 
-**Instrucoes:** Sempre leia este arquivo no inicio de cada sessao para recuperar contexto.
+## Project History
+
+| Version | Date | Change |
+|---------|------|--------|
+| 1.0 | 2024-12-22 | Created as ESPINHA_DORSAL |
+| 2.0 | 2024-12-22 | Renamed to SpineHUB |
+| 2.1 | 2024-12-22 | Multi-user support added |
+
+---
+
+**Instructions:** Always read this file at the start of each session to recover context.
