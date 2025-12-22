@@ -17,6 +17,7 @@ This folder contains the record of all work sessions in the project.
 
 | Date | Summary | Highlights |
 |------|---------|------------|
+| 2025-12-22 | Major Evolution | v2.1 multi-user + English translation |
 | 2024-12-22 | SpineHUB creation | Complete structure v1.0 |
 | 2024-12-22 | Rename | ESPINHA_DORSAL -> SpineHUB v2.0 |
 | 2024-12-22 | Multi-user | Added multi-user support v2.1 |
