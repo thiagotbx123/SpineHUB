@@ -25,4 +25,4 @@ knowledge-base/
 
 | Document | Description | Last Update |
 |----------|-------------|-------------|
-| [doc] | [description] | [date] |
+| [TOOLKIT_INSTALLATION_GUIDE.md](TOOLKIT_INSTALLATION_GUIDE.md) | Complete toolkit setup for new users | 2025-12-22 |
