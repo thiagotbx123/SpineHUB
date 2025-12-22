@@ -1,0 +1,41 @@
+# === ESPINHA_DORSAL Pre-commit Hooks ===
+# Instalar: pip install pre-commit && pre-commit install
+
+repos:
+  # Hooks padrão de qualidade
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Remove trailing whitespace
+      - id: end-of-file-fixer
+        name: Fix end of files
+      - id: check-yaml
+        name: Validate YAML syntax
+      - id: check-json
+        name: Validate JSON syntax
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+        name: Block large files (>1MB)
+      - id: detect-private-key
+        name: Detect private keys
+      - id: check-merge-conflict
+        name: Check merge conflicts
+
+  # Python: Ruff (linter + formatter)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.6
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        name: Ruff linter
+      - id: ruff-format
+        name: Ruff formatter
+
+# Configuração
+default_language_version:
+  python: python3
+
+# Executar em todos os arquivos no commit
+files: ''
+exclude: '^$'

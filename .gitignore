@@ -1,0 +1,65 @@
+# === ESPINHA_DORSAL .gitignore ===
+
+# Credenciais e Segredos
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json
+*_secret*
+*_token*
+
+# Dados Sensíveis
+data/exports/
+data/pii/
+evidence/prints/
+evidence/screenshots/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+env/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temporários
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Node (se aplicável)
+node_modules/
+npm-debug.log
+
+# Cache
+.cache/
+*.cache
+
+# Jupyter (se aplicável)
+.ipynb_checkpoints/
