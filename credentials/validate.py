@@ -175,7 +175,7 @@ def main():
         elif value:
             print(f"       Error: {result.get('error', 'Unknown')}")
         else:
-            print(f"       Not configured")
+            print("       Not configured")
 
     print("\n" + "=" * 60)
 

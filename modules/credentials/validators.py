@@ -5,7 +5,6 @@ Functions to validate credentials by making API calls.
 Each validator returns a tuple of (is_valid, error_message).
 """
 
-import os
 from typing import Tuple, Optional
 
 

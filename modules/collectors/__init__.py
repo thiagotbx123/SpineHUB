@@ -25,6 +25,8 @@ from .base import BaseCollector, CollectorResult, SourceSystem
 from .claude import ClaudeCollector
 from .slack import SlackCollector
 from .local import LocalCollector
+from .linear import LinearCollector
+from .drive import DriveCollector
 
 __all__ = [
     "BaseCollector",
@@ -33,6 +35,8 @@ __all__ = [
     "ClaudeCollector",
     "SlackCollector",
     "LocalCollector",
+    "LinearCollector",
+    "DriveCollector",
     "create_collector",
     "get_all_collectors",
     "run_all_collectors",
@@ -61,8 +65,8 @@ def create_collector(
         "claude": ClaudeCollector,
         "slack": SlackCollector,
         "local": LocalCollector,
-        # "linear": LinearCollector,  # TODO: Implement
-        # "drive": DriveCollector,    # TODO: Implement
+        "linear": LinearCollector,
+        "drive": DriveCollector,
     }
 
     collector_class = collectors.get(source.lower())
@@ -87,7 +91,7 @@ def get_all_collectors(
     Returns:
         List of configured collector instances
     """
-    sources = ["claude", "slack", "local"]  # Active collectors
+    sources = ["claude", "slack", "local", "linear", "drive"]  # Active collectors
     collectors = []
 
     for source in sources:

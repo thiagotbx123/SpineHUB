@@ -36,7 +36,7 @@ def sync_commands(project_path: Path, dry_run: bool = False) -> list:
     if not commands_dest.exists():
         if not dry_run:
             commands_dest.mkdir(parents=True)
-        changes.append(f"Created .claude/commands/")
+        changes.append("Created .claude/commands/")
 
     for cmd_file in COMMANDS_DIR.glob("*.md"):
         dest_file = commands_dest / cmd_file.name
@@ -154,7 +154,7 @@ def sync_all(dry_run: bool = False, project_filter: str = None):
                 print(f"    [OK] {change}")
             total_changes += len(result["changes"])
         elif not result["errors"]:
-            print(f"    [OK] Already up to date")
+            print("    [OK] Already up to date")
 
         print()
 

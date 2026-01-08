@@ -90,7 +90,7 @@ def cmd_git(args):
     elif git_command == "push":
         result = gm.push(force=args.force, set_upstream=args.upstream)
         if result["success"]:
-            print(f"[OK] Pushed successfully")
+            print("[OK] Pushed successfully")
         else:
             print(f"[ERROR] {result['output']}")
 
@@ -122,11 +122,11 @@ def cmd_status(args):
         project_name = cwd.name
         print(f"Project: {project_name}")
         print(f"Path: {cwd}")
-        print(f"SpineHUB: Installed")
+        print("SpineHUB: Installed")
     else:
         print(f"Path: {cwd}")
-        print(f"SpineHUB: NOT INSTALLED")
-        print(f"\nRun 'spinehub init' to install SpineHUB here")
+        print("SpineHUB: NOT INSTALLED")
+        print("\nRun 'spinehub init' to install SpineHUB here")
         return
 
     # Memory status
@@ -136,7 +136,7 @@ def cmd_status(args):
         days_ago = (datetime.now() - mtime).days
         print(f"Memory: Updated {days_ago} days ago ({mtime.strftime('%Y-%m-%d')})")
     else:
-        print(f"Memory: Not found")
+        print("Memory: Not found")
 
     # Sessions count
     sessions_dir = cwd / "sessions"
@@ -157,13 +157,13 @@ def cmd_status(args):
             from modules.github.git_manager import GitManager
             gm = GitManager(str(cwd))
             status = gm.get_status()
-            print(f"\nGit:")
+            print("\nGit:")
             print(f"  Branch: {status['branch']}")
             print(f"  Status: {'clean' if status['clean'] else 'dirty'}")
             if status['ahead'] or status['behind']:
                 print(f"  Sync: {status['ahead']} ahead, {status['behind']} behind")
         except Exception:
-            print(f"\nGit: Configured (details unavailable)")
+            print("\nGit: Configured (details unavailable)")
 
     print("\n" + "=" * 60 + "\n")
 
@@ -316,7 +316,7 @@ def cmd_learn(args):
             spinehub_data.write_text(json.dumps(existing, indent=2, default=str))
             print(f"\n  [OK] Saved {len(new_events)} new events to {spinehub_data}")
         else:
-            print(f"\n  [--] No new events to save")
+            print("\n  [--] No new events to save")
 
     print("\n" + "=" * 60 + "\n")
     return 0

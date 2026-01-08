@@ -67,7 +67,7 @@ def install_global():
     """Install SpineHUB globally."""
     config_path, shell_type = get_shell_config()
 
-    print(f"Installing SpineHUB globally...")
+    print("Installing SpineHUB globally...")
     print(f"  Shell: {shell_type}")
     print(f"  Config: {config_path}")
     print(f"  SpineHUB: {SPINEHUB_ROOT}")

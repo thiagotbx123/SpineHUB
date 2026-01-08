@@ -6,13 +6,11 @@ import pytest
 from datetime import datetime
 from pathlib import Path
 import tempfile
-import json
 
 from src.spinehub import (
     Entity,
     Relation,
     Artifact,
-    Pattern,
     EntityType,
     SpineStorage,
     SpineHub,

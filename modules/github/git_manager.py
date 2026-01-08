@@ -7,12 +7,10 @@ Usage: python git_manager.py [command] [options]
 
 import argparse
 import json
-import os
 import re
 import subprocess
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 
 class GitManager:
@@ -462,7 +460,7 @@ def main():
     elif args.command == "push":
         result = gm.push(force=args.force, set_upstream=args.upstream)
         if result["success"]:
-            print(f"[OK] Pushed successfully")
+            print("[OK] Pushed successfully")
         else:
             print(f"[ERROR] {result['output']}")
 

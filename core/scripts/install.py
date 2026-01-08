@@ -7,7 +7,6 @@ Usage: python install.py [target_path] [--name PROJECT_NAME]
 
 import argparse
 import json
-import os
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -66,7 +65,7 @@ def install_spinehub(target_path: Path, project_name: str = None, description: s
     today = datetime.now().strftime("%Y-%m-%d")
     variables = {
         "PROJECT_NAME": project_name,
-        "PROJECT_DESCRIPTION": description or f"A project managed with SpineHUB",
+        "PROJECT_DESCRIPTION": description or "A project managed with SpineHUB",
         "TECH_STACK": tech_stack or "Python",
         "INSTALL_DATE": today,
         "USER_NAME": user_name,
@@ -81,7 +80,7 @@ def install_spinehub(target_path: Path, project_name: str = None, description: s
     }
 
     print(f"\n{'='*60}")
-    print(f"  SpineHUB Installation")
+    print("  SpineHUB Installation")
     print(f"{'='*60}\n")
     print(f"Target: {target_path}")
     print(f"Project: {project_name}")
@@ -129,10 +128,10 @@ def install_spinehub(target_path: Path, project_name: str = None, description: s
             if "# SpineHUB" not in existing:
                 with open(gitignore_path, "a", encoding="utf-8") as f:
                     f.write("\n\n" + gitignore_content)
-                print(f"  [OK] Updated .gitignore")
+                print("  [OK] Updated .gitignore")
         else:
             gitignore_path.write_text(gitignore_content, encoding="utf-8")
-            print(f"  [OK] Created .gitignore")
+            print("  [OK] Created .gitignore")
 
     # Copy commands
     for cmd_file in COMMANDS_DIR.glob("*.md"):
@@ -157,7 +156,7 @@ This directory contains permanent documentation for the project.
 
 *Managed by SpineHUB*
 """, encoding="utf-8")
-    print(f"  [OK] Created knowledge-base/README.md")
+    print("  [OK] Created knowledge-base/README.md")
 
     # Link credentials if master exists
     master_env = CREDENTIALS_DIR / ".env.master"
@@ -166,7 +165,7 @@ This directory contains permanent documentation for the project.
         if not env_path.exists():
             # Copy instead of symlink for Windows compatibility
             shutil.copy2(master_env, env_path)
-            print(f"  [OK] Copied credentials from master")
+            print("  [OK] Copied credentials from master")
 
     # Register project
     register_project(target_path, project_name)
@@ -176,10 +175,10 @@ This directory contains permanent documentation for the project.
     if not git_dir.exists():
         import subprocess
         subprocess.run(["git", "init"], cwd=target_path, capture_output=True)
-        print(f"  [OK] Initialized git repository")
+        print("  [OK] Initialized git repository")
 
     print(f"\n{'='*60}")
-    print(f"  Installation Complete!")
+    print("  Installation Complete!")
     print(f"{'='*60}\n")
     print("Next steps:")
     print("  1. Review and customize CLAUDE.md")
@@ -205,7 +204,7 @@ def register_project(project_path: Path, project_name: str):
     for p in registry["projects"]:
         if p["path"] == project_path_str:
             p["last_updated"] = datetime.now().isoformat()
-            print(f"  [OK] Updated registry entry")
+            print("  [OK] Updated registry entry")
             REGISTRY_FILE.write_text(json.dumps(registry, indent=2), encoding="utf-8")
             return
 
@@ -219,7 +218,7 @@ def register_project(project_path: Path, project_name: str):
     })
 
     REGISTRY_FILE.write_text(json.dumps(registry, indent=2), encoding="utf-8")
-    print(f"  [OK] Registered in SpineHUB")
+    print("  [OK] Registered in SpineHUB")
 
 
 def main():
