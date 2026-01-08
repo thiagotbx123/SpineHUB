@@ -11,8 +11,14 @@ Usage:
     python -m src.cli collect [--source SOURCE] [--days DAYS]
     python -m src.cli linear <action> [--template TEMPLATE] [--dry-run]
     python -m src.cli channels [--prefix PREFIX]
-    python -m src.cli health [--output FILE]
+    python -m src.cli health [--consolidate] [--learn] [--commit] [--release]
     python -m src.cli release [--version VERSION] [--major|--minor] [--dry-run]
+
+Health Command Modes:
+    health                      Basic health check (code, knowledge graph, sessions, git)
+    health --learn              + Collect data from configured sources
+    health --consolidate        + Full workflow (learn + session + memory + commit)
+    health --consolidate -r     + Create GitHub release after consolidation
 """
 
 import argparse
@@ -302,34 +308,63 @@ def cmd_channels(args):
 
 
 def cmd_health(args):
-    """Run comprehensive health check on SpineHUB."""
+    """Run comprehensive health check and consolidation on SpineHUB."""
     import subprocess
     import json
 
     spinehub_path = Path(__file__).parent.parent
+    modules_path = spinehub_path / "modules"
+    sys.path.insert(0, str(spinehub_path))
+
+    # Determine mode
+    is_consolidate = getattr(args, 'consolidate', False)
+    is_learn = getattr(args, 'learn', False) or is_consolidate
+    is_commit = getattr(args, 'commit', False) or is_consolidate
+    days = getattr(args, 'days', 7)
+
+    total_steps = 4
+    if is_learn:
+        total_steps += 2  # Credentials + Collection
+    if is_consolidate:
+        total_steps += 2  # Session + Memory
 
     print("=" * 60)
-    print("          SPINEHUB HEALTH CHECK")
+    if is_consolidate:
+        print("       SPINEHUB HEALTH + CONSOLIDATION")
+    else:
+        print("          SPINEHUB HEALTH CHECK")
     print("=" * 60)
     print(f"Path: {spinehub_path}")
     print(f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Mode: {'CONSOLIDATE' if is_consolidate else 'LEARN' if is_learn else 'CHECK'}")
     print("=" * 60)
 
     results = {
         "timestamp": datetime.now().isoformat(),
         "path": str(spinehub_path),
+        "mode": "consolidate" if is_consolidate else "learn" if is_learn else "check",
         "checks": {},
+        "collection": {},
+        "consolidation": {},
         "overall_status": "HEALTHY",
     }
     issues_found = 0
+    step = 0
+    session_summary = []
+
+    # =========================================================================
+    # PHASE 1: DIAGNOSTICS
+    # =========================================================================
 
     # 1. CODE ANALYSIS
-    print("\n[1/4] CODE ANALYSIS")
+    step += 1
+    print(f"\n[{step}/{total_steps}] CODE ANALYSIS")
     print("-" * 40)
 
     from .analyzers import CodeAnalyzer
     analyzer = CodeAnalyzer(str(spinehub_path))
     tools = analyzer.check_tools()
+    code_issues = {"errors": 0, "warnings": 0, "security": 0}
 
     for tool_name, available in tools.items():
         if available:
@@ -340,8 +375,12 @@ def cmd_health(args):
                 warning_count = len([i for i in result.issues if i.severity.name == "WARNING"])
                 security_count = len([i for i in result.issues if i.severity.name == "SECURITY"])
 
+                code_issues["errors"] += error_count
+                code_issues["warnings"] += warning_count
+                code_issues["security"] += security_count
+
                 if security_count > 0:
-                    print(f"SECURITY ISSUES: {security_count}")
+                    print(f"SECURITY: {security_count}")
                     issues_found += security_count
                 elif error_count > 0:
                     print(f"ERRORS: {error_count}")
@@ -360,45 +399,54 @@ def cmd_health(args):
                 print(f"FAILED: {e}")
                 results["checks"][tool_name] = {"error": str(e)}
         else:
-            print(f"  {tool_name}: NOT INSTALLED (skipped)")
+            print(f"  {tool_name}: NOT INSTALLED")
+
+    session_summary.append(f"Code Analysis: {code_issues['errors']} errors, {code_issues['warnings']} warnings, {code_issues['security']} security")
 
     # 2. KNOWLEDGE GRAPH STATUS
-    print("\n[2/4] KNOWLEDGE GRAPH STATUS")
+    step += 1
+    print(f"\n[{step}/{total_steps}] KNOWLEDGE GRAPH STATUS")
     print("-" * 40)
 
     data_path = spinehub_path / "data" / "spinehub.json"
+    kg_stats = None
     if data_path.exists():
         try:
-            from .spinehub import SpineHub
+            from src.spinehub import SpineHub
             hub = SpineHub(str(data_path))
-            stats = hub.get_stats()
-            print(f"  Entities:  {stats['entities']}")
-            print(f"  Relations: {stats['relations']}")
-            print(f"  Artifacts: {stats['artifacts']}")
-            print(f"  Patterns:  {stats['patterns']}")
-            print(f"  Last Updated: {stats['metadata'].get('last_updated', 'N/A')}")
-            results["checks"]["knowledge_graph"] = stats
+            kg_stats = hub.get_stats()
+            print(f"  Entities:  {kg_stats['entities']}")
+            print(f"  Relations: {kg_stats['relations']}")
+            print(f"  Artifacts: {kg_stats['artifacts']}")
+            print(f"  Patterns:  {kg_stats['patterns']}")
+            print(f"  Last Updated: {kg_stats['metadata'].get('last_updated', 'N/A')}")
+            results["checks"]["knowledge_graph"] = kg_stats
+            session_summary.append(f"Knowledge Graph: {kg_stats['entities']} entities, {kg_stats['relations']} relations")
         except Exception as e:
             print(f"  ERROR: {e}")
             results["checks"]["knowledge_graph"] = {"error": str(e)}
             issues_found += 1
     else:
-        print("  No data file found (data/spinehub.json)")
+        print("  No data file found (will be created on first learn)")
         results["checks"]["knowledge_graph"] = {"status": "no_data"}
+        session_summary.append("Knowledge Graph: Not initialized")
 
     # 3. SESSIONS CHECK
-    print("\n[3/4] SESSIONS STATUS")
+    step += 1
+    print(f"\n[{step}/{total_steps}] SESSIONS STATUS")
     print("-" * 40)
 
     sessions_path = spinehub_path / "sessions"
+    session_count = 0
+    recent_sessions = []
+
     if sessions_path.exists():
         session_files = list(sessions_path.glob("*.md"))
-        recent_sessions = []
+        session_count = len(session_files)
         week_ago = datetime.now() - timedelta(days=7)
 
         for sf in session_files:
             try:
-                # Parse date from filename (YYYY-MM-DD format)
                 date_str = sf.stem[:10]
                 session_date = datetime.strptime(date_str, "%Y-%m-%d")
                 if session_date >= week_ago:
@@ -406,24 +454,27 @@ def cmd_health(args):
             except ValueError:
                 pass
 
-        print(f"  Total sessions: {len(session_files)}")
+        print(f"  Total sessions: {session_count}")
         print(f"  Last 7 days:    {len(recent_sessions)}")
         if recent_sessions:
             print(f"  Most recent:    {sorted(recent_sessions)[-1]}")
         results["checks"]["sessions"] = {
-            "total": len(session_files),
+            "total": session_count,
             "recent": len(recent_sessions),
         }
     else:
         print("  No sessions directory found")
         results["checks"]["sessions"] = {"status": "no_sessions_dir"}
 
+    session_summary.append(f"Sessions: {session_count} total, {len(recent_sessions)} this week")
+
     # 4. GIT STATUS
-    print("\n[4/4] GIT STATUS")
+    step += 1
+    print(f"\n[{step}/{total_steps}] GIT STATUS")
     print("-" * 40)
 
+    git_info = {"branch": "unknown", "clean": False, "tag": "none"}
     try:
-        # Check if git repo
         git_check = subprocess.run(
             ["git", "rev-parse", "--git-dir"],
             cwd=spinehub_path,
@@ -431,16 +482,15 @@ def cmd_health(args):
             text=True,
         )
         if git_check.returncode == 0:
-            # Get branch
             branch = subprocess.run(
                 ["git", "branch", "--show-current"],
                 cwd=spinehub_path,
                 capture_output=True,
                 text=True,
             ).stdout.strip()
+            git_info["branch"] = branch
             print(f"  Branch: {branch}")
 
-            # Check for uncommitted changes
             status = subprocess.run(
                 ["git", "status", "--porcelain"],
                 cwd=spinehub_path,
@@ -448,13 +498,13 @@ def cmd_health(args):
                 text=True,
             ).stdout.strip()
 
+            git_info["clean"] = not bool(status)
             if status:
                 changes = len(status.split("\n"))
                 print(f"  Uncommitted changes: {changes} files")
             else:
                 print("  Working tree: CLEAN")
 
-            # Get last commit
             last_commit = subprocess.run(
                 ["git", "log", "-1", "--format=%h %s (%cr)"],
                 cwd=spinehub_path,
@@ -463,7 +513,6 @@ def cmd_health(args):
             ).stdout.strip()
             print(f"  Last commit: {last_commit}")
 
-            # Get latest tag
             latest_tag = subprocess.run(
                 ["git", "describe", "--tags", "--abbrev=0"],
                 cwd=spinehub_path,
@@ -471,15 +520,12 @@ def cmd_health(args):
                 text=True,
             )
             if latest_tag.returncode == 0:
-                print(f"  Latest tag: {latest_tag.stdout.strip()}")
+                git_info["tag"] = latest_tag.stdout.strip()
+                print(f"  Latest tag: {git_info['tag']}")
             else:
                 print("  Latest tag: none")
 
-            results["checks"]["git"] = {
-                "branch": branch,
-                "clean": not bool(status),
-                "uncommitted": len(status.split("\n")) if status else 0,
-            }
+            results["checks"]["git"] = git_info
         else:
             print("  Not a git repository")
             results["checks"]["git"] = {"status": "not_a_repo"}
@@ -487,7 +533,325 @@ def cmd_health(args):
         print("  Git not installed")
         results["checks"]["git"] = {"status": "git_not_found"}
 
+    session_summary.append(f"Git: {git_info['branch']} branch, tag {git_info['tag']}")
+
+    # =========================================================================
+    # PHASE 2: LEARNING (if --learn or --consolidate)
+    # =========================================================================
+
+    if is_learn:
+        # 5. CREDENTIALS CHECK
+        step += 1
+        print(f"\n[{step}/{total_steps}] CREDENTIALS STATUS")
+        print("-" * 40)
+
+        credentials = {
+            "slack": bool(os.getenv("SLACK_USER_TOKEN") or os.getenv("SLACK_BOT_TOKEN")),
+            "linear": bool(os.getenv("LINEAR_API_KEY")),
+            "drive": bool(os.getenv("GOOGLE_CLIENT_ID") and os.getenv("GOOGLE_REFRESH_TOKEN")),
+            "claude": True,  # Always available (local files)
+            "local": True,   # Always available
+        }
+
+        configured = []
+        not_configured = []
+        for name, status in credentials.items():
+            if status:
+                configured.append(name)
+                print(f"  {name}: CONFIGURED")
+            else:
+                not_configured.append(name)
+                print(f"  {name}: NOT CONFIGURED")
+
+        results["checks"]["credentials"] = credentials
+        session_summary.append(f"Collectors: {len(configured)} configured ({', '.join(configured)})")
+
+        # 6. DATA COLLECTION
+        step += 1
+        print(f"\n[{step}/{total_steps}] DATA COLLECTION (last {days} days)")
+        print("-" * 40)
+
+        try:
+            from modules.collectors import create_collector
+            from modules.utils import get_default_date_range
+
+            date_range = get_default_date_range(days=days)
+            config = {
+                "SLACK_BOT_TOKEN": os.getenv("SLACK_BOT_TOKEN"),
+                "SLACK_USER_TOKEN": os.getenv("SLACK_USER_TOKEN"),
+                "LINEAR_API_KEY": os.getenv("LINEAR_API_KEY"),
+                "GOOGLE_CLIENT_ID": os.getenv("GOOGLE_CLIENT_ID"),
+                "GOOGLE_CLIENT_SECRET": os.getenv("GOOGLE_CLIENT_SECRET"),
+                "GOOGLE_REFRESH_TOKEN": os.getenv("GOOGLE_REFRESH_TOKEN"),
+            }
+
+            total_events = 0
+            collection_results = {}
+
+            for source in ["claude", "local"]:  # Only run always-available collectors
+                if credentials.get(source):
+                    print(f"  Collecting from {source}...", end=" ")
+                    try:
+                        collector = create_collector(source, config, (date_range.start, date_range.end))
+                        if collector and collector.is_configured():
+                            result = asyncio.run(collector.collect())
+                            event_count = result.record_count
+                            total_events += event_count
+                            collection_results[source] = event_count
+                            print(f"{event_count} events")
+                        else:
+                            print("SKIPPED (not configured)")
+                            collection_results[source] = 0
+                    except Exception as e:
+                        print(f"FAILED: {e}")
+                        collection_results[source] = 0
+
+            results["collection"] = {
+                "date_range": f"{date_range.start.date()} to {date_range.end.date()}",
+                "sources": collection_results,
+                "total_events": total_events,
+            }
+            session_summary.append(f"Collection: {total_events} events from {len([v for v in collection_results.values() if v > 0])} sources")
+
+        except Exception as e:
+            print(f"  Collection failed: {e}")
+            results["collection"] = {"error": str(e)}
+
+    # =========================================================================
+    # PHASE 3: CONSOLIDATION (if --consolidate)
+    # =========================================================================
+
+    if is_consolidate:
+        # 7. CREATE SESSION FILE
+        step += 1
+        print(f"\n[{step}/{total_steps}] SESSION DOCUMENTATION")
+        print("-" * 40)
+
+        session_date = datetime.now().strftime("%Y-%m-%d")
+        session_time = datetime.now().strftime("%H-%M")
+        session_filename = f"{session_date}_{session_time}_health.md"
+        session_file = sessions_path / session_filename
+
+        session_content = f"""# Session: {session_date} {session_time}
+
+## Type
+Health Check + Consolidation
+
+## Summary
+{chr(10).join(f'- {item}' for item in session_summary)}
+
+## Status
+- Overall: {results['overall_status']}
+- Issues Found: {issues_found}
+- Mode: {results['mode']}
+
+## Details
+
+### Code Analysis
+- Errors: {code_issues['errors']}
+- Warnings: {code_issues['warnings']}
+- Security Issues: {code_issues['security']}
+
+### Knowledge Graph
+- Entities: {kg_stats['entities'] if kg_stats else 'N/A'}
+- Relations: {kg_stats['relations'] if kg_stats else 'N/A'}
+- Artifacts: {kg_stats['artifacts'] if kg_stats else 'N/A'}
+
+### Git
+- Branch: {git_info['branch']}
+- Tag: {git_info['tag']}
+- Clean: {git_info['clean']}
+
+## Generated
+Auto-generated by `python -m src.cli health --consolidate`
+"""
+
+        try:
+            sessions_path.mkdir(parents=True, exist_ok=True)
+            with open(session_file, "w", encoding="utf-8") as f:
+                f.write(session_content)
+            print(f"  Created: {session_filename}")
+            results["consolidation"]["session_file"] = session_filename
+        except Exception as e:
+            print(f"  Failed to create session: {e}")
+            results["consolidation"]["session_error"] = str(e)
+
+        # 8. UPDATE MEMORY.MD
+        step += 1
+        print(f"\n[{step}/{total_steps}] MEMORY UPDATE")
+        print("-" * 40)
+
+        memory_path = spinehub_path / ".claude" / "memory.md"
+        memory_content = f"""# SpineHUB Memory
+
+> Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+## Current State
+
+- **Version**: {git_info['tag'] if git_info['tag'] != 'none' else 'development'}
+- **Branch**: {git_info['branch']}
+- **Health**: {results['overall_status']}
+- **Sessions**: {session_count + 1} total
+
+## Last Health Check
+
+- **Date**: {datetime.now().strftime('%Y-%m-%d %H:%M')}
+- **Code Issues**: {issues_found}
+- **Knowledge Graph**: {kg_stats['entities'] if kg_stats else 0} entities
+
+## Recent Actions
+
+- Health check executed
+- Session documented: {session_filename}
+- Memory updated
+
+## Next Steps
+
+1. Review any code issues found ({issues_found} total)
+2. Run `health --consolidate` at end of next session
+3. Consider `release` if significant changes made
+
+## Collectors Status
+
+| Collector | Status |
+|-----------|--------|
+| Claude | Always available |
+| Local | Always available |
+| Slack | {'Configured' if credentials.get('slack') else 'Not configured'} |
+| Linear | {'Configured' if credentials.get('linear') else 'Not configured'} |
+| Drive | {'Configured' if credentials.get('drive') else 'Not configured'} |
+"""
+
+        try:
+            memory_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(memory_path, "w", encoding="utf-8") as f:
+                f.write(memory_content)
+            print(f"  Updated: .claude/memory.md")
+            results["consolidation"]["memory_updated"] = True
+        except Exception as e:
+            print(f"  Failed to update memory: {e}")
+            results["consolidation"]["memory_error"] = str(e)
+
+    # =========================================================================
+    # PHASE 4: COMMIT (if --commit or --consolidate)
+    # =========================================================================
+
+    if is_commit and not git_info["clean"]:
+        print(f"\n[COMMIT] Auto-committing consolidation...")
+        print("-" * 40)
+
+        try:
+            # Stage consolidation files
+            subprocess.run(
+                ["git", "add", ".claude/memory.md", "sessions/"],
+                cwd=spinehub_path,
+                capture_output=True,
+            )
+
+            commit_msg = f"consolidar: health check {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+            subprocess.run(
+                ["git", "commit", "-m", commit_msg],
+                cwd=spinehub_path,
+                capture_output=True,
+            )
+            print(f"  Committed: {commit_msg}")
+            results["consolidation"]["committed"] = True
+        except Exception as e:
+            print(f"  Commit failed: {e}")
+            results["consolidation"]["commit_error"] = str(e)
+
+    # =========================================================================
+    # PHASE 5: RELEASE (if --release)
+    # =========================================================================
+
+    is_release = getattr(args, 'release', False)
+    if is_release and is_consolidate:
+        print(f"\n[RELEASE] Creating GitHub release...")
+        print("-" * 40)
+
+        try:
+            import re
+
+            # Check gh CLI
+            gh_check = subprocess.run(["gh", "--version"], capture_output=True)
+            if gh_check.returncode != 0:
+                print("  GitHub CLI (gh) not available")
+                results["consolidation"]["release"] = "gh_not_available"
+            else:
+                # Get current tag and increment
+                current_tag = git_info.get("tag", "v0.0.0")
+                if current_tag == "none":
+                    current_tag = "v0.0.0"
+
+                match = re.match(r"v(\d+)\.(\d+)\.(\d+)", current_tag)
+                if match:
+                    major, minor, patch = map(int, match.groups())
+                    new_version = f"v{major}.{minor}.{patch + 1}"
+                else:
+                    new_version = "v1.0.0"
+
+                print(f"  Current: {current_tag} -> New: {new_version}")
+
+                # Create release notes
+                release_notes = f"""## SpineHUB {new_version}
+
+### Release Date
+{datetime.now().strftime('%Y-%m-%d')}
+
+### Health Check Summary
+- Code Issues: {issues_found}
+- Knowledge Graph: {kg_stats['entities'] if kg_stats else 0} entities
+- Sessions: {session_count + 1} total
+
+### Changes
+- Health consolidation release
+- Session: {results['consolidation'].get('session_file', 'N/A')}
+
+### Generated
+Auto-generated by `python -m src.cli health --consolidate --release`
+"""
+
+                # Create tag
+                subprocess.run(
+                    ["git", "tag", "-a", new_version, "-m", f"Release {new_version}"],
+                    cwd=spinehub_path,
+                    capture_output=True,
+                )
+
+                # Push tag
+                subprocess.run(
+                    ["git", "push", "origin", new_version],
+                    cwd=spinehub_path,
+                    capture_output=True,
+                )
+
+                # Create release
+                release_result = subprocess.run(
+                    ["gh", "release", "create", new_version,
+                     "--title", f"SpineHUB {new_version}",
+                     "--notes", release_notes],
+                    cwd=spinehub_path,
+                    capture_output=True,
+                    text=True,
+                )
+
+                if release_result.returncode == 0:
+                    print(f"  Created: {new_version}")
+                    print(f"  URL: {release_result.stdout.strip()}")
+                    results["consolidation"]["release"] = new_version
+                    results["consolidation"]["release_url"] = release_result.stdout.strip()
+                else:
+                    print(f"  Release failed: {release_result.stderr}")
+                    results["consolidation"]["release_error"] = release_result.stderr
+
+        except Exception as e:
+            print(f"  Release failed: {e}")
+            results["consolidation"]["release_error"] = str(e)
+
+    # =========================================================================
     # SUMMARY
+    # =========================================================================
+
     print("\n" + "=" * 60)
     print("                    SUMMARY")
     print("=" * 60)
@@ -496,11 +860,19 @@ def cmd_health(args):
         results["overall_status"] = "ISSUES_FOUND"
         print(f"  Status: ISSUES FOUND ({issues_found} issues)")
     else:
-        print("  Status: HEALTHY")
+        print(f"  Status: HEALTHY")
+
+    if is_consolidate:
+        print(f"  Session: {results['consolidation'].get('session_file', 'N/A')}")
+        print(f"  Memory: {'Updated' if results['consolidation'].get('memory_updated') else 'Not updated'}")
+        if is_commit:
+            print(f"  Commit: {'Done' if results['consolidation'].get('committed') else 'Skipped'}")
+        if is_release:
+            print(f"  Release: {results['consolidation'].get('release', 'Skipped')}")
 
     print("=" * 60)
 
-    # Save report if requested
+    # Save JSON report if requested
     if args.output:
         output_path = Path(args.output)
         with open(output_path, "w", encoding="utf-8") as f:
@@ -751,10 +1123,30 @@ def main():
     )
 
     # health command
-    health_parser = subparsers.add_parser("health", help="Run health check on SpineHUB")
+    health_parser = subparsers.add_parser("health", help="Run health check and consolidation")
     health_parser.add_argument(
         "--output", "-o",
         help="Save report to JSON file"
+    )
+    health_parser.add_argument(
+        "--learn", "-l", action="store_true",
+        help="Collect data from configured sources"
+    )
+    health_parser.add_argument(
+        "--consolidate", "-c", action="store_true",
+        help="Full consolidation: learn + session + memory + commit"
+    )
+    health_parser.add_argument(
+        "--commit", action="store_true",
+        help="Auto-commit consolidation files"
+    )
+    health_parser.add_argument(
+        "--release", "-r", action="store_true",
+        help="Create GitHub release after consolidation"
+    )
+    health_parser.add_argument(
+        "--days", "-d", type=int, default=7,
+        help="Days to collect data (default: 7)"
     )
 
     # release command
