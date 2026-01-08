@@ -4,19 +4,20 @@
 
 ## Current State
 
-**Phase:** Production (v2.2 - With Toolkit Documentation)
-**Last Update:** 2025-12-22
+**Phase:** Production (v3.0 - Complete Rewrite with Collectors)
+**Last Update:** 2026-01-08
 **Current User:** See .claude/user-config.md
 
 ## Recent Actions
 
 | Date | Action | Result | User |
 |------|--------|--------|------|
+| 2026-01-08 | SpineHUB v3.0 complete rewrite | Collectors, knowledge graph, learn command | Thiago |
+| 2026-01-08 | Port collectors from TSA_CORTEX | ClaudeCollector, SlackCollector, LocalCollector | Thiago |
+| 2026-01-08 | Implement learn command | `spinehub learn --days 7 --sources claude,slack,local` | Thiago |
+| 2026-01-08 | Implement activate command | `spinehub activate install` for global support | Thiago |
 | 2025-12-22 | Toolkit inventory scan | 189+ components documented in Excel | Thiago |
 | 2025-12-22 | Full English translation | 14 files translated, pushed to GitHub | Thiago |
-| 2025-12-22 | Multi-user support v2.1 | /setup command, user-config, .env template | Thiago |
-| 2025-12-22 | Rename to SpineHUB | Updated all references across projects | Thiago |
-| 2025-12-22 | Initial creation | Complete structure from ESPINHA_DORSAL | Thiago |
 
 ## Known Blockers
 
@@ -94,14 +95,36 @@ Flow: user-config.md exists?
 | 2.0 | 2024-12-22 | Renamed to SpineHUB |
 | 2.1 | 2025-12-22 | Multi-user support + English translation |
 | 2.2 | 2025-12-22 | Toolkit documentation + Excel inventory |
+| 3.0 | 2026-01-08 | Complete rewrite: collectors, knowledge graph, learn command |
 
 ## Available Commands
 
+### Slash Commands (Claude)
 | Command | Purpose |
 |---------|---------|
 | /setup | Configure new user (auto-detection + guided) |
 | /status | Show project overview and current state |
 | /consolidar | Save session, update memory, commit |
+
+### CLI Commands (spinehub.py)
+| Command | Purpose |
+|---------|---------|
+| `spinehub learn` | Collect activity from sources (claude, slack, local) |
+| `spinehub activate` | Install SpineHUB globally for cross-project support |
+| `spinehub init` | Install SpineHUB in any project |
+| `spinehub sync` | Sync commands across registered projects |
+| `spinehub git` | Git operations (status, commit, consolidar, push, pull) |
+| `spinehub status` | Show current project status |
+| `spinehub list` | List registered projects |
+
+### Collectors Available
+| Collector | Source | Status |
+|-----------|--------|--------|
+| ClaudeCollector | ~/.claude/history.jsonl, sessions | Implemented |
+| SlackCollector | Slack API (search) | Implemented (requires tokens) |
+| LocalCollector | File system scanning | Implemented |
+| LinearCollector | Linear API | TODO |
+| DriveCollector | Google Drive | TODO |
 
 ## Key Files Reference
 

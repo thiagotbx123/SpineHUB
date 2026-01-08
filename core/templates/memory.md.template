@@ -1,0 +1,60 @@
+# Memory - {{PROJECT_NAME}} Persistent State
+
+> This file maintains context between sessions. Update via `/consolidar`.
+
+## Current State
+
+**Phase:** {{INITIAL_PHASE}}
+**Last Update:** {{INSTALL_DATE}}
+**User:** {{USER_NAME}}
+
+---
+
+## Recent Actions
+
+| Date | Action | Result |
+|------|--------|--------|
+| {{INSTALL_DATE}} | SpineHUB initialized | Structure created |
+
+---
+
+## Known Blockers
+
+- [ ] None currently
+
+---
+
+## Important Decisions
+
+| Date | Decision | Context | Decided by |
+|------|----------|---------|------------|
+| {{INSTALL_DATE}} | Adopt SpineHUB | Standardize memory | {{USER_NAME}} |
+
+---
+
+## Key Learnings
+
+*(Add learnings as you work on the project)*
+
+---
+
+## Session Notes
+
+### {{INSTALL_DATE}} (Initial Setup)
+- **Achievements:** SpineHUB structure installed
+- **Next:** Start working on project
+
+---
+
+## Available Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/status` | Show project overview |
+| `/consolidar` | Save session and commit |
+
+---
+
+**Instructions:** Always read this file at the start of each session to recover context.
+
+<!-- SpineHUB v3.1 -->

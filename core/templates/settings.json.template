@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(npm *)",
+      "Bash(python *)",
+      "Bash(pip *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(sudo *)",
+      "Bash(shutdown *)"
+    ]
+  },
+  "spinehub": {
+    "version": "3.1",
+    "installed": "{{INSTALL_DATE}}",
+    "auto_commit": true,
+    "auto_push": false,
+    "session_reminders": true
+  }
+}

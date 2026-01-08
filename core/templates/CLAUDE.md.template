@@ -1,0 +1,76 @@
+# Instructions for Claude - {{PROJECT_NAME}}
+
+> **MANDATORY READING** - This file contains instructions that Claude MUST follow in EVERY session.
+
+## About This Project
+
+**{{PROJECT_NAME}}** is {{PROJECT_DESCRIPTION}}
+
+**Stack:** {{TECH_STACK}}
+
+---
+
+## Session Start Protocol
+
+**BEFORE responding to anything, ALWAYS execute these steps IN ORDER:**
+
+1. **Read Memory**: Check `.claude/memory.md` for current state
+2. **Check Sessions**: Look at `sessions/` for recent work
+3. **Review Knowledge Base**: Consult `knowledge-base/` if needed
+
+---
+
+## Session End Protocol
+
+**When finishing work, ALWAYS run `/consolidar`:**
+
+1. Document what was done
+2. Update memory.md
+3. Create session file
+4. Commit and push to Git
+
+---
+
+## Available Commands
+
+| Command | Function | When to Use |
+|---------|----------|-------------|
+| `/status` | Project overview | Start of session |
+| `/consolidar` | Save session | End of session |
+
+---
+
+## Project Structure
+
+```
+{{PROJECT_NAME}}/
+├── .claude/
+│   ├── commands/       # Slash commands
+│   ├── memory.md       # Persistent state
+│   └── settings.json   # Permissions
+├── sessions/           # Session history
+├── knowledge-base/     # Documentation
+├── CLAUDE.md           # This file
+└── {{MAIN_DIRS}}
+```
+
+---
+
+## Golden Rules
+
+1. **Never lose context** - Always read memory.md first
+2. **Always document** - Use /consolidar at the end
+3. **Maintain history** - Never delete sessions or knowledge
+4. **Git is mandatory** - All work must be versioned
+
+---
+
+## Project-Specific Rules
+
+{{PROJECT_RULES}}
+
+---
+
+**IMPORTANT:** These instructions ensure continuity and quality between sessions.
+
+<!-- SpineHUB v3.1 | Installed: {{INSTALL_DATE}} -->

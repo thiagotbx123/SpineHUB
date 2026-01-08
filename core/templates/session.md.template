@@ -1,0 +1,66 @@
+# Session: {{DATE}} - {{DESCRIPTION}}
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| Date | {{DATE}} |
+| Duration | {{DURATION}} |
+| User | {{USER_NAME}} |
+| Project | {{PROJECT_NAME}} |
+
+---
+
+## Summary
+
+{{SUMMARY}}
+
+---
+
+## Changes Made
+
+| File | Change |
+|------|--------|
+| {{FILE}} | {{CHANGE}} |
+
+---
+
+## Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| {{DECISION}} | {{RATIONALE}} |
+
+---
+
+## Learnings
+
+- {{LEARNING}}
+
+---
+
+## Artifacts Created
+
+| Artifact | Type | Location |
+|----------|------|----------|
+| {{ARTIFACT}} | {{TYPE}} | {{LOCATION}} |
+
+---
+
+## Next Steps
+
+- [ ] {{NEXT_STEP}}
+
+---
+
+## Git
+
+| Field | Value |
+|-------|-------|
+| Commit | {{COMMIT_HASH}} |
+| Branch | {{BRANCH}} |
+| Message | {{COMMIT_MESSAGE}} |
+
+---
+
+<!-- SpineHUB Session Record -->

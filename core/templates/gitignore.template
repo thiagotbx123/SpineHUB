@@ -1,0 +1,64 @@
+# SpineHUB Standard .gitignore
+
+# Environment and credentials
+.env
+.env.local
+.env.*.local
+*.secret
+*_secret*
+*_token*
+credentials.json
+
+# Claude user-specific
+.claude/user-config.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# SpineHUB specific
+.spinehub-cache/

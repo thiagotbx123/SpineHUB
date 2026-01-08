@@ -1,0 +1,48 @@
+{
+  "version": "3.1",
+  "created": "2026-01-08",
+  "projects": [
+    {
+      "name": "SpineHUB",
+      "path": "C:\\Users\\adm_r\\SpineHUB",
+      "installed": "2026-01-08T00:00:00",
+      "last_updated": "2026-01-08T00:00:00",
+      "spinehub_version": "3.1"
+    },
+    {
+      "name": "TSA_CORTEX",
+      "path": "C:\\Users\\adm_r\\Projects\\TSA_CORTEX",
+      "installed": "2024-12-23T00:00:00",
+      "last_updated": "2026-01-08T00:00:00",
+      "spinehub_version": "2.0"
+    },
+    {
+      "name": "intuit-boom",
+      "path": "C:\\Users\\adm_r\\intuit-boom",
+      "installed": "2024-12-19T00:00:00",
+      "last_updated": "2026-01-07T00:00:00",
+      "spinehub_version": "2.0"
+    },
+    {
+      "name": "GEM-BOOM",
+      "path": "C:\\Users\\adm_r\\GEM-BOOM",
+      "installed": "2024-12-18T00:00:00",
+      "last_updated": "2024-12-24T00:00:00",
+      "spinehub_version": "2.0"
+    },
+    {
+      "name": "SLACK_MONITOR",
+      "path": "C:\\Users\\adm_r\\SLACK_MONITOR",
+      "installed": "2026-01-07T00:00:00",
+      "last_updated": "2026-01-08T00:00:00",
+      "spinehub_version": "1.0"
+    },
+    {
+      "name": "GOD_EXTRACT",
+      "path": "C:\\Users\\adm_r\\GOD_EXTRACT",
+      "installed": "2026-01-08T18:35:38.312574",
+      "last_updated": "2026-01-08T18:35:38.312578",
+      "spinehub_version": "3.1"
+    }
+  ]
+}

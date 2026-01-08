@@ -1,0 +1,19 @@
+# SpineHUB Dependencies
+
+# Core
+dataclasses-json>=0.6.0
+
+# Code Analysis Tools
+ruff>=0.1.0
+bandit>=1.7.0
+vulture>=2.10
+radon>=6.0.0
+
+# Optional: for collectors
+# slack-sdk>=3.23.0
+# google-api-python-client>=2.100.0
+# linear-sdk>=0.1.0
+
+# Development
+pytest>=7.4.0
+pytest-cov>=4.1.0
