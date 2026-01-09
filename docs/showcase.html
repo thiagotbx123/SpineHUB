@@ -20,8 +20,8 @@
 
         .universe {
             position: relative;
-            width: 1000px;
-            height: 950px;
+            width: 1100px;
+            height: 1000px;
         }
 
         /* CORE */
@@ -30,8 +30,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             background: linear-gradient(135deg, #6366f1, #0ea5e9);
             border-radius: 50%;
             display: flex;
@@ -40,87 +40,87 @@
             justify-content: center;
             box-shadow: 0 0 60px rgba(99,102,241,0.5), 0 0 120px rgba(99,102,241,0.3);
             z-index: 10;
-            cursor: help;
         }
 
-        .core-icon { width: 65px; height: 65px; }
-        .core-name { font-size: 0.85rem; font-weight: 700; margin-top: 0.3rem; letter-spacing: 0.1em; }
-
-        /* TOOLTIP */
-        .tooltip {
-            position: absolute;
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(99,102,241,0.3);
-            border-radius: 12px;
-            padding: 1rem;
-            max-width: 280px;
-            font-size: 0.8rem;
-            line-height: 1.5;
-            color: #cbd5e1;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s;
-            z-index: 100;
-            pointer-events: none;
-        }
-
-        .tooltip-title {
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .cluster:hover .tooltip,
-        .core:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-        }
+        .core-icon { width: 70px; height: 70px; }
+        .core-name { font-size: 1rem; font-weight: 700; margin-top: 0.4rem; letter-spacing: 0.1em; }
 
         /* CLUSTERS */
         .cluster {
             position: absolute;
             background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 16px;
-            padding: 0.8rem;
-            cursor: help;
-            transition: all 0.3s;
-        }
-
-        .cluster:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(99,102,241,0.2);
+            padding: 1rem 1.2rem;
         }
 
         .cluster-title {
-            font-size: 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.1em;
             text-align: center;
-            padding-bottom: 0.5rem;
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .cluster-items {
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
+            gap: 0.4rem;
         }
 
         .item {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0.35rem 0.5rem;
-            background: rgba(255,255,255,0.02);
-            border-radius: 6px;
-            font-size: 0.7rem;
-            color: #94a3b8;
+            gap: 0.6rem;
+            padding: 0.5rem 0.7rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            position: relative;
+            cursor: help;
+            transition: all 0.2s;
         }
 
-        .item-icon { font-size: 0.9rem; }
+        .item:hover {
+            background: rgba(99,102,241,0.15);
+        }
+
+        .item-icon { font-size: 1.1rem; }
+
+        /* TOOLTIP */
+        .item .tip {
+            position: absolute;
+            left: 105%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1e293b;
+            border: 1px solid rgba(99,102,241,0.4);
+            border-radius: 8px;
+            padding: 0.6rem 0.8rem;
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            z-index: 50;
+        }
+
+        .item:hover .tip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Tooltip positioning adjustments */
+        .cluster.faxina .item .tip,
+        .cluster.credenciais .item .tip {
+            left: auto;
+            right: 105%;
+        }
 
         /* LINES */
         svg.lines {
@@ -133,25 +133,25 @@
         }
 
         svg.lines line {
-            stroke: rgba(99,102,241,0.12);
-            stroke-width: 1;
+            stroke: rgba(99,102,241,0.4);
+            stroke-width: 2;
         }
 
         /* POSITIONS */
-        .cluster.coleta { top: 20px; left: 50%; transform: translateX(-50%); }
-        .cluster.faxina { top: 120px; right: 20px; }
-        .cluster.credenciais { bottom: 120px; right: 20px; }
-        .cluster.projetos { bottom: 20px; left: 50%; transform: translateX(-50%); }
-        .cluster.versionamento { bottom: 120px; left: 20px; }
-        .cluster.automacao { top: 120px; left: 20px; }
+        .cluster.coleta { top: 30px; left: 50%; transform: translateX(-50%); }
+        .cluster.faxina { top: 140px; right: 30px; }
+        .cluster.credenciais { bottom: 140px; right: 30px; }
+        .cluster.projetos { bottom: 30px; left: 50%; transform: translateX(-50%); }
+        .cluster.versionamento { bottom: 140px; left: 30px; }
+        .cluster.automacao { top: 140px; left: 30px; }
 
         /* COLORS */
-        .cluster.coleta { border-color: rgba(56,189,248,0.3); }
-        .cluster.faxina { border-color: rgba(251,146,60,0.3); }
-        .cluster.credenciais { border-color: rgba(250,204,21,0.3); }
-        .cluster.projetos { border-color: rgba(168,85,247,0.3); }
-        .cluster.versionamento { border-color: rgba(251,113,133,0.3); }
-        .cluster.automacao { border-color: rgba(52,211,153,0.3); }
+        .cluster.coleta { border-color: rgba(56,189,248,0.4); }
+        .cluster.faxina { border-color: rgba(251,146,60,0.4); }
+        .cluster.credenciais { border-color: rgba(250,204,21,0.4); }
+        .cluster.projetos { border-color: rgba(168,85,247,0.4); }
+        .cluster.versionamento { border-color: rgba(251,113,133,0.4); }
+        .cluster.automacao { border-color: rgba(52,211,153,0.4); }
 
         .cluster.coleta .cluster-title { color: #38bdf8; }
         .cluster.faxina .cluster-title { color: #fb923c; }
@@ -160,85 +160,70 @@
         .cluster.versionamento .cluster-title { color: #fb7185; }
         .cluster.automacao .cluster-title { color: #34d399; }
 
-        /* TOOLTIP POSITIONS */
-        .cluster.coleta .tooltip { top: 100%; left: 50%; transform: translateX(-50%); margin-top: 10px; }
-        .cluster.faxina .tooltip { left: auto; right: 100%; top: 0; margin-right: 10px; }
-        .cluster.credenciais .tooltip { left: auto; right: 100%; bottom: 0; top: auto; margin-right: 10px; }
-        .cluster.projetos .tooltip { bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 10px; }
-        .cluster.versionamento .tooltip { right: auto; left: 100%; bottom: 0; top: auto; margin-left: 10px; }
-        .cluster.automacao .tooltip { right: auto; left: 100%; top: 0; margin-left: 10px; }
-        .core .tooltip { top: 100%; left: 50%; transform: translateX(-50%); margin-top: 10px; }
-
         /* FOOTER */
         .footer {
             position: fixed;
-            bottom: 0.8rem;
-            font-size: 0.65rem;
-            color: #334155;
+            bottom: 1rem;
+            font-size: 0.75rem;
+            color: #475569;
         }
         .footer a { color: #6366f1; text-decoration: none; }
 
         /* RESPONSIVE */
-        @media (max-width: 1050px) { .universe { transform: scale(0.75); } }
-        @media (max-width: 800px) { .universe { transform: scale(0.55); } }
+        @media (max-width: 1150px) { .universe { transform: scale(0.7); } }
+        @media (max-width: 850px) { .universe { transform: scale(0.5); } }
     </style>
 </head>
 <body>
     <div class="universe">
         <!-- LINES -->
         <svg class="lines">
-            <line x1="500" y1="400" x2="500" y2="200"/>
-            <line x1="560" y1="430" x2="780" y2="280"/>
-            <line x1="560" y1="520" x2="780" y2="670"/>
-            <line x1="500" y1="550" x2="500" y2="750"/>
-            <line x1="440" y1="520" x2="220" y2="670"/>
-            <line x1="440" y1="430" x2="220" y2="280"/>
+            <line x1="550" y1="420" x2="550" y2="220"/>
+            <line x1="620" y1="450" x2="850" y2="300"/>
+            <line x1="620" y1="550" x2="850" y2="700"/>
+            <line x1="550" y1="580" x2="550" y2="780"/>
+            <line x1="480" y1="550" x2="250" y2="700"/>
+            <line x1="480" y1="450" x2="250" y2="300"/>
         </svg>
 
         <!-- CORE -->
         <div class="core">
             <svg class="core-icon" viewBox="0 0 100 100" fill="none">
-                <rect x="42" y="8" width="16" height="10" rx="2" fill="#fff"/>
-                <rect x="44" y="20" width="12" height="6" rx="1" fill="#a5b4fc"/>
-                <rect x="40" y="28" width="20" height="12" rx="2" fill="#fff"/>
-                <rect x="44" y="42" width="12" height="6" rx="1" fill="#a5b4fc"/>
-                <rect x="38" y="50" width="24" height="14" rx="2" fill="#fff"/>
-                <rect x="44" y="66" width="12" height="6" rx="1" fill="#a5b4fc"/>
-                <rect x="40" y="74" width="20" height="12" rx="2" fill="#fff"/>
-                <rect x="44" y="88" width="12" height="6" rx="1" fill="#a5b4fc"/>
-                <circle cx="34" cy="34" r="4" fill="#22d3ee"/>
-                <circle cx="66" cy="34" r="4" fill="#22d3ee"/>
-                <circle cx="32" cy="57" r="4" fill="#22d3ee"/>
-                <circle cx="68" cy="57" r="4" fill="#22d3ee"/>
-                <circle cx="34" cy="80" r="4" fill="#22d3ee"/>
-                <circle cx="66" cy="80" r="4" fill="#22d3ee"/>
-                <line x1="34" y1="34" x2="40" y2="34" stroke="#22d3ee" stroke-width="2"/>
-                <line x1="60" y1="34" x2="66" y2="34" stroke="#22d3ee" stroke-width="2"/>
-                <line x1="32" y1="57" x2="38" y2="57" stroke="#22d3ee" stroke-width="2"/>
-                <line x1="62" y1="57" x2="68" y2="57" stroke="#22d3ee" stroke-width="2"/>
-                <line x1="34" y1="80" x2="40" y2="80" stroke="#22d3ee" stroke-width="2"/>
-                <line x1="60" y1="80" x2="66" y2="80" stroke="#22d3ee" stroke-width="2"/>
+                <!-- Robotic Spine -->
+                <rect x="42" y="5" width="16" height="12" rx="2" fill="#fff"/>
+                <rect x="44" y="19" width="12" height="5" rx="1" fill="#a5b4fc"/>
+                <rect x="40" y="26" width="20" height="14" rx="2" fill="#fff"/>
+                <rect x="44" y="42" width="12" height="5" rx="1" fill="#a5b4fc"/>
+                <rect x="38" y="49" width="24" height="16" rx="2" fill="#fff"/>
+                <rect x="44" y="67" width="12" height="5" rx="1" fill="#a5b4fc"/>
+                <rect x="40" y="74" width="20" height="14" rx="2" fill="#fff"/>
+                <rect x="44" y="90" width="12" height="5" rx="1" fill="#a5b4fc"/>
+                <!-- Connectors -->
+                <circle cx="32" cy="33" r="5" fill="#22d3ee"/>
+                <circle cx="68" cy="33" r="5" fill="#22d3ee"/>
+                <circle cx="30" cy="57" r="5" fill="#22d3ee"/>
+                <circle cx="70" cy="57" r="5" fill="#22d3ee"/>
+                <circle cx="32" cy="81" r="5" fill="#22d3ee"/>
+                <circle cx="68" cy="81" r="5" fill="#22d3ee"/>
+                <line x1="32" y1="33" x2="40" y2="33" stroke="#22d3ee" stroke-width="2"/>
+                <line x1="60" y1="33" x2="68" y2="33" stroke="#22d3ee" stroke-width="2"/>
+                <line x1="30" y1="57" x2="38" y2="57" stroke="#22d3ee" stroke-width="2"/>
+                <line x1="62" y1="57" x2="70" y2="57" stroke="#22d3ee" stroke-width="2"/>
+                <line x1="32" y1="81" x2="40" y2="81" stroke="#22d3ee" stroke-width="2"/>
+                <line x1="60" y1="81" x2="68" y2="81" stroke="#22d3ee" stroke-width="2"/>
             </svg>
             <span class="core-name">SPINEHUB</span>
-            <div class="tooltip">
-                <div class="tooltip-title">SpineHUB Core</div>
-                Central de inteligencia que conecta todos os projetos. Knowledge graph persistente, memoria entre sessoes, e orquestracao de todas as funcoes. 3000+ linhas de codigo Python.
-            </div>
         </div>
 
         <!-- COLETA -->
         <div class="cluster coleta">
             <div class="cluster-title">Coleta Automatica</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">💬</span> Slack</div>
-                <div class="item"><span class="item-icon">📋</span> Linear</div>
-                <div class="item"><span class="item-icon">🤖</span> Claude</div>
-                <div class="item"><span class="item-icon">📁</span> Google Drive</div>
-                <div class="item"><span class="item-icon">💻</span> Arquivos Locais</div>
-            </div>
-            <div class="tooltip">
-                <div class="tooltip-title">Coleta Automatica de Dados</div>
-                Coleta atividade de 5 fontes diferentes automaticamente. Slack (DMs, canais, mencoes), Linear (tickets, projetos), Claude (historico, sessoes), Google Drive (docs) e arquivos locais. 92% de reducao de ruido com deduplicacao inteligente.
+                <div class="item"><span class="item-icon">💬</span> Slack <span class="tip">DMs, canais, mencoes via API</span></div>
+                <div class="item"><span class="item-icon">📋</span> Linear <span class="tip">Tickets, projetos, updates</span></div>
+                <div class="item"><span class="item-icon">🤖</span> Claude <span class="tip">Historico e sessoes .jsonl</span></div>
+                <div class="item"><span class="item-icon">📁</span> Google Drive <span class="tip">Documentos via OAuth</span></div>
+                <div class="item"><span class="item-icon">💻</span> Arquivos Locais <span class="tip">Downloads, Documents, projetos</span></div>
             </div>
         </div>
 
@@ -246,14 +231,10 @@
         <div class="cluster faxina">
             <div class="cluster-title">Faxina de Codigo</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">🔧</span> Ruff (Linter)</div>
-                <div class="item"><span class="item-icon">🛡️</span> Bandit (Seguranca)</div>
-                <div class="item"><span class="item-icon">🦅</span> Vulture (Dead Code)</div>
-                <div class="item"><span class="item-icon">📈</span> Radon (Complexidade)</div>
-            </div>
-            <div class="tooltip">
-                <div class="tooltip-title">Analise e Limpeza de Codigo</div>
-                4 ferramentas integradas: Ruff (linter 100x mais rapido), Bandit (detecta vulnerabilidades SQL injection, XSS), Vulture (encontra codigo morto), Radon (mede complexidade ciclomatica A-F). Report unificado em um comando.
+                <div class="item"><span class="item-icon">🔧</span> Ruff <span class="tip">Linter 100x mais rapido</span></div>
+                <div class="item"><span class="item-icon">🛡️</span> Bandit <span class="tip">Detecta SQL injection, XSS</span></div>
+                <div class="item"><span class="item-icon">🦅</span> Vulture <span class="tip">Encontra codigo morto</span></div>
+                <div class="item"><span class="item-icon">📈</span> Radon <span class="tip">Complexidade ciclomatica A-F</span></div>
             </div>
         </div>
 
@@ -261,17 +242,13 @@
         <div class="cluster credenciais">
             <div class="cluster-title">Credenciais & APIs</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">💬</span> Slack (Bot+User+MCP)</div>
-                <div class="item"><span class="item-icon">📋</span> Linear API</div>
-                <div class="item"><span class="item-icon">🐙</span> GitHub Token</div>
-                <div class="item"><span class="item-icon">🔵</span> Google OAuth</div>
-                <div class="item"><span class="item-icon">🅰️</span> Anthropic API</div>
-                <div class="item"><span class="item-icon">💎</span> Gemini API</div>
-                <div class="item"><span class="item-icon">💰</span> QuickBooks (8 empresas)</div>
-            </div>
-            <div class="tooltip">
-                <div class="tooltip-title">Gestao Centralizada de Credenciais</div>
-                Todas as credenciais em um lugar (.env.master). Validacao automatica com cada API. Copia credenciais entre projetos com um comando. 7 validadores integrados. Gerencia 8 MCPs incluindo 8 empresas QuickBooks.
+                <div class="item"><span class="item-icon">💬</span> Slack <span class="tip">Bot + User + MCP tokens</span></div>
+                <div class="item"><span class="item-icon">📋</span> Linear <span class="tip">API Key + Default Team</span></div>
+                <div class="item"><span class="item-icon">🐙</span> GitHub <span class="tip">Personal Access Token</span></div>
+                <div class="item"><span class="item-icon">🔵</span> Google <span class="tip">OAuth Client + Refresh Token</span></div>
+                <div class="item"><span class="item-icon">🅰️</span> Anthropic <span class="tip">Claude API Key</span></div>
+                <div class="item"><span class="item-icon">💎</span> Gemini <span class="tip">Google AI API Key</span></div>
+                <div class="item"><span class="item-icon">💰</span> QuickBooks <span class="tip">8 empresas via OAuth MCPs</span></div>
             </div>
         </div>
 
@@ -279,16 +256,12 @@
         <div class="cluster projetos">
             <div class="cluster-title">Projetos Conectados</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">🧠</span> SpineHUB</div>
-                <div class="item"><span class="item-icon">🧬</span> TSA_CORTEX</div>
-                <div class="item"><span class="item-icon">📊</span> intuit-boom</div>
-                <div class="item"><span class="item-icon">💎</span> GEM-BOOM</div>
-                <div class="item"><span class="item-icon">📡</span> SLACK_MONITOR</div>
-                <div class="item"><span class="item-icon">⚡</span> GOD_EXTRACT</div>
-            </div>
-            <div class="tooltip">
-                <div class="tooltip-title">6 Projetos Registrados</div>
-                SpineHUB se instala em qualquer projeto com um comando. Sincroniza slash commands, credenciais e configuracoes entre todos. Registry centralizado rastreia versao e ultima atualizacao de cada projeto.
+                <div class="item"><span class="item-icon">🦴</span> SpineHUB <span class="tip">Este projeto - Central</span></div>
+                <div class="item"><span class="item-icon">🧬</span> TSA_CORTEX <span class="tip">Knowledge graph TypeScript</span></div>
+                <div class="item"><span class="item-icon">📊</span> intuit-boom <span class="tip">Integracao QuickBooks</span></div>
+                <div class="item"><span class="item-icon">💎</span> GEM-BOOM <span class="tip">Gemini AI automations</span></div>
+                <div class="item"><span class="item-icon">📡</span> SLACK_MONITOR <span class="tip">Monitoramento Slack</span></div>
+                <div class="item"><span class="item-icon">⚡</span> GOD_EXTRACT <span class="tip">Extracao de dados</span></div>
             </div>
         </div>
 
@@ -296,15 +269,11 @@
         <div class="cluster versionamento">
             <div class="cluster-title">Git & Releases</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">📝</span> Auto-Commit</div>
-                <div class="item"><span class="item-icon">🚀</span> GitHub Releases</div>
-                <div class="item"><span class="item-icon">🔀</span> Sync Multi-Projeto</div>
-                <div class="item"><span class="item-icon">🏷️</span> Tags Automaticas</div>
-                <div class="item"><span class="item-icon">📤</span> Push/Pull</div>
-            </div>
-            <div class="tooltip">
-                <div class="tooltip-title">Automacao Git Completa</div>
-                Commits automaticos com mensagens inteligentes. Cria releases no GitHub com changelog. Sincroniza comandos para todos os projetos de uma vez. Tags semanticas (major/minor/patch). Consolidacao automatica no fim de sessao.
+                <div class="item"><span class="item-icon">📝</span> Auto-Commit <span class="tip">Mensagens inteligentes</span></div>
+                <div class="item"><span class="item-icon">🚀</span> GitHub Releases <span class="tip">Changelog automatico</span></div>
+                <div class="item"><span class="item-icon">🔀</span> Sync Multi-Projeto <span class="tip">Atualiza todos de uma vez</span></div>
+                <div class="item"><span class="item-icon">🏷️</span> Tags Automaticas <span class="tip">Semantic versioning</span></div>
+                <div class="item"><span class="item-icon">📤</span> Push/Pull <span class="tip">Sync com remote</span></div>
             </div>
         </div>
 
@@ -312,16 +281,12 @@
         <div class="cluster automacao">
             <div class="cluster-title">Automacao Claude</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">🚫</span> Bypass Yes/No</div>
-                <div class="item"><span class="item-icon">🧠</span> Knowledge Graph</div>
-                <div class="item"><span class="item-icon">💾</span> Memoria Persistente</div>
-                <div class="item"><span class="item-icon">📝</span> Sessoes Documentadas</div>
-                <div class="item"><span class="item-icon">🎫</span> Tickets Linear Auto</div>
-                <div class="item"><span class="item-icon">⚡</span> 6 MCPs Ativos</div>
-            </div>
-            <div class="tooltip">
-                <div class="tooltip-title">Superpoderes para Claude</div>
-                bypassPermissions elimina confirmacoes Yes/No. Knowledge graph persiste contexto entre sessoes. Memoria automatica em .claude/memory.md. Documenta cada sessao. Cria tickets no Linear com templates. 6 MCPs: filesystem, memory, github, playwright, slack, quickbooks.
+                <div class="item"><span class="item-icon">🚫</span> Bypass Yes/No <span class="tip">Elimina confirmacoes</span></div>
+                <div class="item"><span class="item-icon">🕸️</span> Knowledge Graph <span class="tip">Entidades, relacoes, artefatos</span></div>
+                <div class="item"><span class="item-icon">💾</span> Memoria Persistente <span class="tip">.claude/memory.md automatico</span></div>
+                <div class="item"><span class="item-icon">📝</span> Sessoes Documentadas <span class="tip">sessions/*.md automatico</span></div>
+                <div class="item"><span class="item-icon">🎫</span> Tickets Linear <span class="tip">6 templates automaticos</span></div>
+                <div class="item"><span class="item-icon">⚡</span> 6 MCPs Ativos <span class="tip">filesystem, github, slack, etc</span></div>
             </div>
         </div>
     </div>
