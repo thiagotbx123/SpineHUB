@@ -9,279 +9,244 @@
 
         body {
             font-family: system-ui, sans-serif;
-            background: #0a0a0f;
+            background: #08080c;
             color: #fff;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #818cf8, #38bdf8, #34d399);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 3rem;
-        }
-
-        .diagram {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            max-width: 100%;
-        }
-
-        .row {
-            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
+            overflow: hidden;
         }
 
-        .node {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            cursor: default;
-            transition: all 0.3s;
+        .universe {
             position: relative;
+            width: 900px;
+            height: 900px;
         }
 
-        .node:hover {
-            transform: scale(1.15);
-            border-color: #818cf8;
-            box-shadow: 0 0 30px rgba(129,140,248,0.3);
-        }
-
-        .node:hover::after {
-            content: attr(data-label);
+        /* CORE */
+        .core {
             position: absolute;
-            bottom: -22px;
-            font-size: 0.65rem;
-            color: #94a3b8;
-            white-space: nowrap;
-        }
-
-        .node.core {
-            width: 90px;
-            height: 90px;
-            font-size: 2.5rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
             background: linear-gradient(135deg, #6366f1, #0ea5e9);
-            border: none;
-            box-shadow: 0 0 40px rgba(99,102,241,0.4);
-        }
-
-        .node.core:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 60px rgba(99,102,241,0.6);
-        }
-
-        .arrow {
-            color: #334155;
-            font-size: 1.2rem;
-        }
-
-        .arrow-down {
-            font-size: 1.5rem;
-            color: #334155;
-            margin: 0.3rem 0;
-        }
-
-        .section {
+            border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
-            padding: 1.5rem;
-            border-radius: 16px;
-            background: rgba(255,255,255,0.01);
-            border: 1px solid rgba(255,255,255,0.05);
+            justify-content: center;
+            box-shadow:
+                0 0 60px rgba(99,102,241,0.5),
+                0 0 120px rgba(99,102,241,0.3);
+            z-index: 10;
         }
 
-        .section-label {
-            font-size: 0.6rem;
+        .core-icon { font-size: 3rem; }
+        .core-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-top: 0.3rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* CLUSTERS */
+        .cluster {
+            position: absolute;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .cluster-title {
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: #475569;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.15em;
+            color: #64748b;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .branch {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-
-        .branch-item {
+        .cluster-items {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .mini-row {
-            display: flex;
             gap: 0.4rem;
         }
 
-        .mini-node {
-            width: 36px;
-            height: 36px;
+        .item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            border-radius: 8px;
+            gap: 0.5rem;
+            padding: 0.4rem 0.6rem;
             background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.08);
-            position: relative;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: #cbd5e1;
         }
 
-        .mini-node:hover::after {
-            content: attr(data-label);
+        .item-icon { font-size: 1rem; }
+
+        /* CONNECTORS */
+        .connector {
             position: absolute;
-            bottom: -18px;
-            font-size: 0.55rem;
-            color: #64748b;
-            white-space: nowrap;
+            background: linear-gradient(90deg, rgba(99,102,241,0.3), rgba(99,102,241,0));
+            height: 2px;
+            transform-origin: left center;
+            z-index: 1;
         }
 
-        footer {
-            margin-top: 3rem;
-            color: #334155;
+        /* POSITIONS */
+        .cluster.fontes { top: 30px; left: 50%; transform: translateX(-50%); }
+        .cluster.analise { top: 150px; right: 30px; }
+        .cluster.outputs { bottom: 150px; right: 30px; }
+        .cluster.projetos { bottom: 30px; left: 50%; transform: translateX(-50%); }
+        .cluster.git { bottom: 150px; left: 30px; }
+        .cluster.apis { top: 150px; left: 30px; }
+
+        /* CLUSTER COLORS */
+        .cluster.fontes { border-color: rgba(56,189,248,0.3); }
+        .cluster.analise { border-color: rgba(251,146,60,0.3); }
+        .cluster.outputs { border-color: rgba(52,211,153,0.3); }
+        .cluster.projetos { border-color: rgba(168,85,247,0.3); }
+        .cluster.git { border-color: rgba(251,113,133,0.3); }
+        .cluster.apis { border-color: rgba(250,204,21,0.3); }
+
+        .cluster.fontes .cluster-title { color: #38bdf8; }
+        .cluster.analise .cluster-title { color: #fb923c; }
+        .cluster.outputs .cluster-title { color: #34d399; }
+        .cluster.projetos .cluster-title { color: #a855f7; }
+        .cluster.git .cluster-title { color: #fb7185; }
+        .cluster.apis .cluster-title { color: #facc15; }
+
+        /* LINES */
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        svg line {
+            stroke: rgba(99,102,241,0.15);
+            stroke-width: 1;
+        }
+
+        /* FOOTER */
+        .footer {
+            position: fixed;
+            bottom: 1rem;
             font-size: 0.7rem;
+            color: #334155;
         }
 
-        footer a {
-            color: #6366f1;
-            text-decoration: none;
+        .footer a { color: #6366f1; text-decoration: none; }
+
+        @media (max-width: 950px) {
+            .universe { transform: scale(0.7); }
+        }
+
+        @media (max-width: 700px) {
+            .universe { transform: scale(0.5); }
         }
     </style>
 </head>
 <body>
-    <h1>SpineHUB</h1>
-    <p class="subtitle">Central de Inteligencia</p>
-
-    <div class="diagram">
-
-        <!-- INPUTS -->
-        <div class="section">
-            <div class="section-label">Fontes</div>
-            <div class="row">
-                <div class="node" data-label="Slack">💬</div>
-                <div class="arrow">→</div>
-                <div class="node" data-label="Linear">📋</div>
-                <div class="arrow">→</div>
-                <div class="node" data-label="Claude">🤖</div>
-                <div class="arrow">→</div>
-                <div class="node" data-label="Drive">📁</div>
-                <div class="arrow">→</div>
-                <div class="node" data-label="Local">💻</div>
-            </div>
-        </div>
-
-        <div class="arrow-down">▼</div>
-
-        <!-- COLLECTORS -->
-        <div class="row">
-            <div class="node" data-label="Coletar">📥</div>
-            <div class="arrow">→</div>
-            <div class="node" data-label="Filtrar">🔍</div>
-            <div class="arrow">→</div>
-            <div class="node" data-label="Normalizar">⚡</div>
-        </div>
-
-        <div class="arrow-down">▼</div>
+    <div class="universe">
+        <!-- LINES SVG -->
+        <svg>
+            <line x1="450" y1="380" x2="450" y2="180" />
+            <line x1="520" y1="400" x2="720" y2="280" />
+            <line x1="520" y1="500" x2="720" y2="620" />
+            <line x1="450" y1="520" x2="450" y2="720" />
+            <line x1="380" y1="500" x2="180" y2="620" />
+            <line x1="380" y1="400" x2="180" y2="280" />
+        </svg>
 
         <!-- CORE -->
-        <div class="node core" data-label="SpineHUB">🧠</div>
-
-        <div class="arrow-down">▼</div>
-
-        <!-- PROCESSING -->
-        <div class="row">
-            <div class="node" data-label="Grafo">🕸️</div>
-            <div class="arrow">↔</div>
-            <div class="node" data-label="Memoria">💾</div>
-            <div class="arrow">↔</div>
-            <div class="node" data-label="Analise">📊</div>
+        <div class="core">
+            <span class="core-icon">🧠</span>
+            <span class="core-name">SPINEHUB</span>
         </div>
 
-        <div class="arrow-down">▼</div>
+        <!-- FONTES -->
+        <div class="cluster fontes">
+            <div class="cluster-title">Fontes de Dados</div>
+            <div class="cluster-items">
+                <div class="item"><span class="item-icon">💬</span> Slack</div>
+                <div class="item"><span class="item-icon">📋</span> Linear</div>
+                <div class="item"><span class="item-icon">🤖</span> Claude</div>
+                <div class="item"><span class="item-icon">📁</span> Drive</div>
+                <div class="item"><span class="item-icon">💻</span> Local</div>
+            </div>
+        </div>
+
+        <!-- ANALISE -->
+        <div class="cluster analise">
+            <div class="cluster-title">Analise de Codigo</div>
+            <div class="cluster-items">
+                <div class="item"><span class="item-icon">🔧</span> Ruff</div>
+                <div class="item"><span class="item-icon">🛡️</span> Bandit</div>
+                <div class="item"><span class="item-icon">🦅</span> Vulture</div>
+                <div class="item"><span class="item-icon">📈</span> Radon</div>
+            </div>
+        </div>
 
         <!-- OUTPUTS -->
-        <div class="section">
-            <div class="section-label">Saidas</div>
-            <div class="row">
-                <div class="node" data-label="Tickets">🎫</div>
-                <div class="arrow">←</div>
-                <div class="node" data-label="Docs">📝</div>
-                <div class="arrow">←</div>
-                <div class="node" data-label="Git">🔄</div>
-                <div class="arrow">←</div>
-                <div class="node" data-label="Release">🚀</div>
-                <div class="arrow">←</div>
-                <div class="node" data-label="Sync">🔗</div>
+        <div class="cluster outputs">
+            <div class="cluster-title">Automacao</div>
+            <div class="cluster-items">
+                <div class="item"><span class="item-icon">🎫</span> Tickets</div>
+                <div class="item"><span class="item-icon">📝</span> Sessoes</div>
+                <div class="item"><span class="item-icon">💾</span> Memoria</div>
+                <div class="item"><span class="item-icon">🔔</span> Alertas</div>
             </div>
         </div>
 
-        <!-- BRANCHES -->
-        <div class="branch">
-            <div class="branch-item">
-                <div class="arrow-down">▼</div>
-                <div class="section-label">Seguranca</div>
-                <div class="mini-row">
-                    <div class="mini-node" data-label="Ruff">🔧</div>
-                    <div class="mini-node" data-label="Bandit">🛡️</div>
-                    <div class="mini-node" data-label="Vulture">🦅</div>
-                    <div class="mini-node" data-label="Radon">📈</div>
-                </div>
-            </div>
-
-            <div class="branch-item">
-                <div class="arrow-down">▼</div>
-                <div class="section-label">APIs</div>
-                <div class="mini-row">
-                    <div class="mini-node" data-label="GitHub">🐙</div>
-                    <div class="mini-node" data-label="Anthropic">🅰️</div>
-                    <div class="mini-node" data-label="Google">🔵</div>
-                    <div class="mini-node" data-label="QuickBooks">💰</div>
-                </div>
-            </div>
-
-            <div class="branch-item">
-                <div class="arrow-down">▼</div>
-                <div class="section-label">Projetos</div>
-                <div class="mini-row">
-                    <div class="mini-node" data-label="TSA">📦</div>
-                    <div class="mini-node" data-label="GEM">💎</div>
-                    <div class="mini-node" data-label="QBO">📊</div>
-                    <div class="mini-node" data-label="+4">➕</div>
-                </div>
+        <!-- PROJETOS -->
+        <div class="cluster projetos">
+            <div class="cluster-title">Projetos Conectados</div>
+            <div class="cluster-items">
+                <div class="item"><span class="item-icon">🧬</span> TSA_CORTEX</div>
+                <div class="item"><span class="item-icon">💎</span> GEM-BOOM</div>
+                <div class="item"><span class="item-icon">📊</span> QBO WFS</div>
+                <div class="item"><span class="item-icon">🔗</span> +4 outros</div>
             </div>
         </div>
 
+        <!-- GIT -->
+        <div class="cluster git">
+            <div class="cluster-title">Versionamento</div>
+            <div class="cluster-items">
+                <div class="item"><span class="item-icon">🔄</span> Commits</div>
+                <div class="item"><span class="item-icon">🚀</span> Releases</div>
+                <div class="item"><span class="item-icon">🔀</span> Sync</div>
+                <div class="item"><span class="item-icon">📦</span> Tags</div>
+            </div>
+        </div>
+
+        <!-- APIS -->
+        <div class="cluster apis">
+            <div class="cluster-title">Integracoes</div>
+            <div class="cluster-items">
+                <div class="item"><span class="item-icon">🐙</span> GitHub</div>
+                <div class="item"><span class="item-icon">🅰️</span> Anthropic</div>
+                <div class="item"><span class="item-icon">🔵</span> Google</div>
+                <div class="item"><span class="item-icon">💰</span> QuickBooks</div>
+            </div>
+        </div>
     </div>
 
-    <footer>
+    <div class="footer">
         <a href="https://github.com/thiagotbx123/SpineHUB">GitHub</a> · v3.1
-    </footer>
+    </div>
 </body>
 </html>
