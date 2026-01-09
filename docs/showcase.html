@@ -129,11 +129,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: -1;
         }
 
         svg.lines line {
-            stroke: rgba(99,102,241,0.4);
+            stroke: rgba(99,102,241,0.35);
             stroke-width: 2;
         }
 
@@ -160,14 +160,6 @@
         .cluster.versionamento .cluster-title { color: #fb7185; }
         .cluster.automacao .cluster-title { color: #34d399; }
 
-        /* FOOTER */
-        .footer {
-            position: fixed;
-            bottom: 1rem;
-            font-size: 0.75rem;
-            color: #475569;
-        }
-        .footer a { color: #6366f1; text-decoration: none; }
 
         /* RESPONSIVE */
         @media (max-width: 1150px) { .universe { transform: scale(0.7); } }
@@ -178,12 +170,12 @@
     <div class="universe">
         <!-- LINES -->
         <svg class="lines">
-            <line x1="550" y1="420" x2="550" y2="220"/>
-            <line x1="620" y1="450" x2="850" y2="300"/>
-            <line x1="620" y1="550" x2="850" y2="700"/>
-            <line x1="550" y1="580" x2="550" y2="780"/>
-            <line x1="480" y1="550" x2="250" y2="700"/>
-            <line x1="480" y1="450" x2="250" y2="300"/>
+            <line x1="550" y1="420" x2="550" y2="270"/>
+            <line x1="620" y1="460" x2="820" y2="340"/>
+            <line x1="620" y1="540" x2="820" y2="660"/>
+            <line x1="550" y1="580" x2="550" y2="730"/>
+            <line x1="480" y1="540" x2="280" y2="660"/>
+            <line x1="480" y1="460" x2="280" y2="340"/>
         </svg>
 
         <!-- CORE -->
@@ -289,10 +281,6 @@
                 <div class="item"><span class="item-icon">⚡</span> 6 MCPs Ativos <span class="tip">filesystem, github, slack, etc</span></div>
             </div>
         </div>
-    </div>
-
-    <div class="footer">
-        <a href="https://github.com/thiagotbx123/SpineHUB">GitHub</a> · v3.1 · 3000+ linhas · 30+ arquivos
     </div>
 </body>
 </html>
