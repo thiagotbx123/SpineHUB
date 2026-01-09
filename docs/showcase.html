@@ -99,15 +99,32 @@
             transform: translateY(-50%);
             background: #1e293b;
             border: 1px solid rgba(99,102,241,0.4);
-            border-radius: 8px;
-            padding: 0.6rem 0.8rem;
-            font-size: 0.75rem;
-            color: #cbd5e1;
-            white-space: nowrap;
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            width: 280px;
+            white-space: normal;
+            line-height: 1.5;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s;
             z-index: 50;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .item .tip strong {
+            color: #a5b4fc;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .item .tip code {
+            background: rgba(0,0,0,0.3);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: #fbbf24;
         }
 
         .item:hover .tip {
@@ -211,11 +228,11 @@
         <div class="cluster coleta">
             <div class="cluster-title">Coleta Automatica</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">💬</span> Slack <span class="tip">DMs, canais, mencoes via API</span></div>
-                <div class="item"><span class="item-icon">📋</span> Linear <span class="tip">Tickets, projetos, updates</span></div>
-                <div class="item"><span class="item-icon">🤖</span> Claude <span class="tip">Historico e sessoes .jsonl</span></div>
-                <div class="item"><span class="item-icon">📁</span> Google Drive <span class="tip">Documentos via OAuth</span></div>
-                <div class="item"><span class="item-icon">💻</span> Arquivos Locais <span class="tip">Downloads, Documents, projetos</span></div>
+                <div class="item"><span class="item-icon">💬</span> Slack <span class="tip"><strong>Mensagens do Slack</strong>Coleta DMs, mensagens de canais e mencoes automaticamente. Classifica por ownership (meu trabalho, mencionado, contexto).<br><code>spinehub learn --sources slack</code></span></div>
+                <div class="item"><span class="item-icon">📋</span> Linear <span class="tip"><strong>Tickets e Projetos</strong>Busca issues, project updates e comentarios. Rastreia status de projetos e marcos importantes.<br><code>spinehub learn --sources linear</code></span></div>
+                <div class="item"><span class="item-icon">🤖</span> Claude <span class="tip"><strong>Historico do Claude</strong>Le ~/.claude/history.jsonl e todas as sessoes. Extrai prompts, respostas e padroes de trabalho. 92% reducao de ruido.<br><code>spinehub learn --sources claude</code></span></div>
+                <div class="item"><span class="item-icon">📁</span> Google Drive <span class="tip"><strong>Documentos na Nuvem</strong>Acessa Google Docs, Sheets e arquivos compartilhados via OAuth. Indexa conteudo para o knowledge graph.<br><code>spinehub learn --sources drive</code></span></div>
+                <div class="item"><span class="item-icon">💻</span> Arquivos Locais <span class="tip"><strong>Sistema de Arquivos</strong>Varre Downloads, Documents e pastas de projeto. Usa SHA256 para deduplicacao. Denylist configuravel.<br><code>spinehub learn --sources local</code></span></div>
             </div>
         </div>
 
@@ -223,10 +240,10 @@
         <div class="cluster faxina">
             <div class="cluster-title">Faxina de Codigo</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">🔧</span> Ruff <span class="tip">Linter 100x mais rapido</span></div>
-                <div class="item"><span class="item-icon">🛡️</span> Bandit <span class="tip">Detecta SQL injection, XSS</span></div>
-                <div class="item"><span class="item-icon">🦅</span> Vulture <span class="tip">Encontra codigo morto</span></div>
-                <div class="item"><span class="item-icon">📈</span> Radon <span class="tip">Complexidade ciclomatica A-F</span></div>
+                <div class="item"><span class="item-icon">🔧</span> Ruff <span class="tip"><strong>Linter Ultra-Rapido</strong>100x mais rapido que flake8. Verifica estilo (E), warnings (W), imports (I) e pyflakes (F). Auto-fix disponivel.<br><code>spinehub analyze --tool ruff</code></span></div>
+                <div class="item"><span class="item-icon">🛡️</span> Bandit <span class="tip"><strong>Scanner de Seguranca</strong>Detecta SQL injection (B608), command injection (B602), senhas hardcoded e deserializacao insegura.<br><code>spinehub analyze --tool bandit</code></span></div>
+                <div class="item"><span class="item-icon">🦅</span> Vulture <span class="tip"><strong>Detector de Codigo Morto</strong>Encontra funcoes, classes, variaveis e imports nao utilizados. Threshold de confianca configuravel.<br><code>spinehub analyze --tool vulture</code></span></div>
+                <div class="item"><span class="item-icon">📈</span> Radon <span class="tip"><strong>Analisador de Complexidade</strong>Calcula complexidade ciclomatica. Notas A (simples) ate F (complexo). Identifica onde refatorar.<br><code>spinehub analyze --tool radon</code></span></div>
             </div>
         </div>
 
@@ -234,13 +251,13 @@
         <div class="cluster credenciais">
             <div class="cluster-title">Credenciais & APIs</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">💬</span> Slack <span class="tip">Bot + User + MCP tokens</span></div>
-                <div class="item"><span class="item-icon">📋</span> Linear <span class="tip">API Key + Default Team</span></div>
-                <div class="item"><span class="item-icon">🐙</span> GitHub <span class="tip">Personal Access Token</span></div>
-                <div class="item"><span class="item-icon">🔵</span> Google <span class="tip">OAuth Client + Refresh Token</span></div>
-                <div class="item"><span class="item-icon">🅰️</span> Anthropic <span class="tip">Claude API Key</span></div>
-                <div class="item"><span class="item-icon">💎</span> Gemini <span class="tip">Google AI API Key</span></div>
-                <div class="item"><span class="item-icon">💰</span> QuickBooks <span class="tip">8 empresas via OAuth MCPs</span></div>
+                <div class="item"><span class="item-icon">💬</span> Slack <span class="tip"><strong>3 Tokens Slack</strong>BOT_TOKEN para automacao, USER_TOKEN para busca pessoal, MCP tokens (XOXC/XOXD) para acesso direto.<br><code>SLACK_BOT_TOKEN=xoxb-...</code></span></div>
+                <div class="item"><span class="item-icon">📋</span> Linear <span class="tip"><strong>Linear GraphQL API</strong>API Key para criar tickets, buscar projetos e automatizar workflows. Inclui team padrao configurado.<br><code>LINEAR_API_KEY=lin_api_...</code></span></div>
+                <div class="item"><span class="item-icon">🐙</span> GitHub <span class="tip"><strong>GitHub Personal Token</strong>Acesso a repos, criar releases, gerenciar issues. Usado pelo MCP github e pelo CLI gh.<br><code>GITHUB_TOKEN=ghp_...</code></span></div>
+                <div class="item"><span class="item-icon">🔵</span> Google <span class="tip"><strong>Google OAuth 2.0</strong>Client ID, Client Secret e Refresh Token para Google Drive, Docs e Sheets. Renovacao automatica.<br><code>GOOGLE_REFRESH_TOKEN=1//...</code></span></div>
+                <div class="item"><span class="item-icon">🅰️</span> Anthropic <span class="tip"><strong>Claude API</strong>Chave para acessar Claude via API. Validacao automatica do formato sk-ant-api.<br><code>ANTHROPIC_API_KEY=sk-ant-...</code></span></div>
+                <div class="item"><span class="item-icon">💎</span> Gemini <span class="tip"><strong>Google AI Studio</strong>API Key para Gemini Pro. Testado automaticamente via /candidates endpoint.<br><code>GEM_API_KEY=AIza...</code></span></div>
+                <div class="item"><span class="item-icon">💰</span> QuickBooks <span class="tip"><strong>8 Empresas QuickBooks</strong>OAuth tokens para 8 empresas diferentes via MCPs dedicados. Acesso a invoices, clientes e reports.<br><code>qb-empresa1, qb-empresa2...</code></span></div>
             </div>
         </div>
 
@@ -248,12 +265,12 @@
         <div class="cluster projetos">
             <div class="cluster-title">Projetos Conectados</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">🦴</span> SpineHUB <span class="tip">Este projeto - Central</span></div>
-                <div class="item"><span class="item-icon">🧬</span> TSA_CORTEX <span class="tip">Knowledge graph TypeScript</span></div>
-                <div class="item"><span class="item-icon">📊</span> intuit-boom <span class="tip">Integracao QuickBooks</span></div>
-                <div class="item"><span class="item-icon">💎</span> GEM-BOOM <span class="tip">Gemini AI automations</span></div>
-                <div class="item"><span class="item-icon">📡</span> SLACK_MONITOR <span class="tip">Monitoramento Slack</span></div>
-                <div class="item"><span class="item-icon">⚡</span> GOD_EXTRACT <span class="tip">Extracao de dados</span></div>
+                <div class="item"><span class="item-icon">🦴</span> SpineHUB <span class="tip"><strong>Central de Inteligencia</strong>Este projeto. 3000+ linhas Python, knowledge graph, collectors, analyzers. A espinha dorsal que conecta tudo.<br><code>C:\Users\adm_r\SpineHUB</code></span></div>
+                <div class="item"><span class="item-icon">🧬</span> TSA_CORTEX <span class="tip"><strong>Knowledge Graph TypeScript</strong>Versao original em TS. Grafo de conhecimento, entidades, relacoes. Inspiracao para o SpineHUB Python.<br><code>C:\Users\adm_r\Projects\TSA_CORTEX</code></span></div>
+                <div class="item"><span class="item-icon">📊</span> intuit-boom <span class="tip"><strong>Integracao QuickBooks</strong>Automacao financeira com Intuit. Reports, invoices, reconciliacao. 8 empresas conectadas.<br><code>C:\Users\adm_r\intuit-boom</code></span></div>
+                <div class="item"><span class="item-icon">💎</span> GEM-BOOM <span class="tip"><strong>Gemini AI Automations</strong>Projeto de automacao com Google Gemini. Processamento de texto e analise com IA.<br><code>C:\Users\adm_r\GEM-BOOM</code></span></div>
+                <div class="item"><span class="item-icon">📡</span> SLACK_MONITOR <span class="tip"><strong>Monitoramento Slack</strong>Monitora canais e DMs em tempo real. Alertas e notificacoes automaticas.<br><code>C:\Users\adm_r\SLACK_MONITOR</code></span></div>
+                <div class="item"><span class="item-icon">⚡</span> GOD_EXTRACT <span class="tip"><strong>Extracao de Dados</strong>Ferramenta para extrair e processar dados de multiplas fontes. ETL automatizado.<br><code>C:\Users\adm_r\GOD_EXTRACT</code></span></div>
             </div>
         </div>
 
@@ -261,11 +278,11 @@
         <div class="cluster versionamento">
             <div class="cluster-title">Git & Releases</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">📝</span> Auto-Commit <span class="tip">Mensagens inteligentes</span></div>
-                <div class="item"><span class="item-icon">🚀</span> GitHub Releases <span class="tip">Changelog automatico</span></div>
-                <div class="item"><span class="item-icon">🔀</span> Sync Multi-Projeto <span class="tip">Atualiza todos de uma vez</span></div>
-                <div class="item"><span class="item-icon">🏷️</span> Tags Automaticas <span class="tip">Semantic versioning</span></div>
-                <div class="item"><span class="item-icon">📤</span> Push/Pull <span class="tip">Sync com remote</span></div>
+                <div class="item"><span class="item-icon">📝</span> Auto-Commit <span class="tip"><strong>Commits Inteligentes</strong>Gera mensagens de commit automaticamente baseado nas mudancas. Formato conventional commits.<br><code>spinehub git commit --auto</code></span></div>
+                <div class="item"><span class="item-icon">🚀</span> GitHub Releases <span class="tip"><strong>Releases Automaticas</strong>Cria releases no GitHub com changelog gerado automaticamente. Tag + notes + assets.<br><code>spinehub release --minor</code></span></div>
+                <div class="item"><span class="item-icon">🔀</span> Sync Multi-Projeto <span class="tip"><strong>Sincronizacao em Massa</strong>Atualiza slash commands e configs em todos os projetos registrados de uma vez.<br><code>spinehub sync --all</code></span></div>
+                <div class="item"><span class="item-icon">🏷️</span> Tags Automaticas <span class="tip"><strong>Semantic Versioning</strong>Cria tags automaticamente seguindo semver. Major.minor.patch com incremento automatico.<br><code>spinehub release --patch</code></span></div>
+                <div class="item"><span class="item-icon">📤</span> Push/Pull <span class="tip"><strong>Sync com Remote</strong>Push e pull automatizados com tratamento de conflitos e upstream tracking.<br><code>spinehub git push</code></span></div>
             </div>
         </div>
 
@@ -273,12 +290,12 @@
         <div class="cluster automacao">
             <div class="cluster-title">Automacao Claude</div>
             <div class="cluster-items">
-                <div class="item"><span class="item-icon">🚫</span> Bypass Yes/No <span class="tip">Elimina confirmacoes</span></div>
-                <div class="item"><span class="item-icon">🕸️</span> Knowledge Graph <span class="tip">Entidades, relacoes, artefatos</span></div>
-                <div class="item"><span class="item-icon">💾</span> Memoria Persistente <span class="tip">.claude/memory.md automatico</span></div>
-                <div class="item"><span class="item-icon">📝</span> Sessoes Documentadas <span class="tip">sessions/*.md automatico</span></div>
-                <div class="item"><span class="item-icon">🎫</span> Tickets Linear <span class="tip">6 templates automaticos</span></div>
-                <div class="item"><span class="item-icon">⚡</span> 6 MCPs Ativos <span class="tip">filesystem, github, slack, etc</span></div>
+                <div class="item"><span class="item-icon">🚫</span> Bypass Yes/No <span class="tip"><strong>Sem Confirmacoes</strong>bypassPermissions no settings.json elimina todas as perguntas Yes/No do Claude. Execucao fluida sem interrupcoes.<br><code>"defaultMode": "bypassPermissions"</code></span></div>
+                <div class="item"><span class="item-icon">🕸️</span> Knowledge Graph <span class="tip"><strong>Grafo de Conhecimento</strong>Armazena entidades (pessoas, projetos), relacoes (works_with, mentions) e artefatos. Persistente em JSON.<br><code>data/spinehub.json</code></span></div>
+                <div class="item"><span class="item-icon">💾</span> Memoria Persistente <span class="tip"><strong>Contexto Entre Sessoes</strong>Atualiza .claude/memory.md automaticamente. Claude nunca perde o fio da meada entre conversas.<br><code>.claude/memory.md</code></span></div>
+                <div class="item"><span class="item-icon">📝</span> Sessoes Documentadas <span class="tip"><strong>Historico de Trabalho</strong>Cria arquivo em sessions/ para cada sessao. Resumo, status, detalhes. Auditoria completa.<br><code>sessions/2026-01-09_health.md</code></span></div>
+                <div class="item"><span class="item-icon">🎫</span> Tickets Linear <span class="tip"><strong>6 Templates Automaticos</strong>weekly_update, at_risk_alert, stale_project, milestone_reached, daily_status, blocker_alert.<br><code>spinehub linear --template at_risk</code></span></div>
+                <div class="item"><span class="item-icon">⚡</span> 6 MCPs Ativos <span class="tip"><strong>Model Context Protocols</strong>filesystem (arquivos), memory (persistencia), github (repos), playwright (browser), slack (API), quickbooks (8 empresas).<br><code>claude_desktop_config.json</code></span></div>
             </div>
         </div>
     </div>
